@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using PsychoticLab;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -13,6 +15,8 @@ public class CharacterCreationManager : MonoBehaviour
    [FormerlySerializedAs("stats")] public StatsUI statsUI;
    public int statRange;
    public int medianStatValue;
+   public TextMeshProUGUI nameText;
+   public NameGenerator nameGenerator;
 
    private List<TypeEnums.ResourceTypes> currentSelectedResources = new List<TypeEnums.ResourceTypes>();
 
@@ -31,6 +35,7 @@ public class CharacterCreationManager : MonoBehaviour
        {
            statsUI.RandomizeStats(medianStatValue,statRange, currentSelectedResources);
            randomizer.Randomize();
+           nameText.text = nameGenerator.GenerateRandomName(currentSelectedResources);
        }
        
    }
