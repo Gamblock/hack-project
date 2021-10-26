@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c04155d43740f46a3223a7eb386e0c, type: 3}
+  m_Name: _UIPopupDatabase
+  m_EditorClassIdentifier: 
+  PopupNames:
+  - AchievementPopup
+  - AllYourBase
+  - Popup1
+  - Popup2
+  - Popup3
+  Popups:
+  - {fileID: 11400000, guid: 3729bce727b92ce43a76a19ee485545b, type: 2}
+  - {fileID: 11400000, guid: 09b9c5f1cfdbaca4f83d999c802a54ed, type: 2}
+  - {fileID: 11400000, guid: ccc96a3d38744bf4ca347433859f5089, type: 2}
+  - {fileID: 11400000, guid: b484f5bd08aeaf14598bcc73d9172d5f, type: 2}
+  - {fileID: 11400000, guid: 6ddd09fe508023541baf44c4ead21ad9, type: 2}

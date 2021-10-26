@@ -1,0 +1,12 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: E6 - Animated Bar 2
+  m_Controller: {fileID: 9100000, guid: 42ed6b7190e745b41b3c4753deabc123, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a05834e5596c020478a6cd2bdcb7db75, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 459f79db9283f7e48a32950619dd17b5, type: 2}

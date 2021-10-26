@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f42f06ff6cc543ea942180e019f0fc8d, type: 3}
+  m_Name: UIView_Example
+  m_EditorClassIdentifier: 
+  CategoryName: Example
+  DatabaseType: 2
+  Names:
+  - Background
+  - Background Black
+  - Background Blue
+  - Background Doozy
+  - Background Gray
+  - Background Green
+  - Background Orange
+  - BottomBar
+  - Doozy
+  - Five
+  - Four
+  - MainMenu
+  - Nody
+  - One
+  - Rate
+  - Settings
+  - Soundy
+  - Start
+  - Three
+  - TopBar
+  - Touchy
+  - Two
+  - Welcome

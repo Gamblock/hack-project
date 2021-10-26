@@ -16,7 +16,7 @@ public class ResourceNameParts
 [CreateAssetMenu(fileName = "NameGenerator")]
 public class NameGenerator : ScriptableObject
 {
-    
+    public CharacterInfoSO charachter;
     public string finalName;
     public List<ResourceNameParts> namePartsList;
     public string GenerateRandomName(List<TypeEnums.ResourceTypes> resourcesUsed)
@@ -31,10 +31,11 @@ public class NameGenerator : ScriptableObject
                 {
                     string temp =  namepart.nameParts[Random.Range(0,  namepart.nameParts.Count - 1)];
                     finalName += temp;
-                    Debug.Log( temp);
                 }
             }
         }
+
+        charachter.charNAme = finalName;
         return finalName;
        
     }

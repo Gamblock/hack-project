@@ -61,6 +61,7 @@ namespace PsychoticLab
 
 
         public CharacterInfoSO characterInfoSo;
+        public VoidEventChannelSO onCharacterCreated;
 
         public bool setupCamera;
         // list of enabed objects on character
@@ -100,16 +101,16 @@ namespace PsychoticLab
             }
             */
 
-            GUIStyle style = new GUIStyle();
-            style.normal.textColor = Color.white;
-            style.fontStyle = FontStyle.Bold;
-            style.fontSize = 24;
-            GUI.Label(new Rect(10, 10, 150, 50), "Hold Right Mouse Button Down\nor use W A S D To Rotate.", style);
+          //  GUIStyle style = new GUIStyle();
+          //  style.normal.textColor = Color.white;
+           // style.fontStyle = FontStyle.Bold;
+          //  style.fontSize = 24;
+           // GUI.Label(new Rect(10, 10, 150, 50), "Hold Right Mouse Button Down\nor use W A S D To Rotate.", style);
         }
         
         public void GetRandomizedPartsIndexes()
-        {
-            
+        {   
+            characterInfoSo.objectIndexes.Clear();
             for (int i = 0; i < allAvaliablePartsList.Count; i++)
             {
                 if (allAvaliablePartsList[i].activeSelf && allAvaliablePartsList[i].gameObject.name.Contains("Chr_"))
@@ -121,7 +122,7 @@ namespace PsychoticLab
         }
         private void Start()
         {
-            characterInfoSo.objectIndexes.Clear();
+            //characterInfoSo.objectIndexes.Clear();
             Transform[] childTransforms = this.transform.GetComponentsInChildren<Transform>();
             foreach (var tr in childTransforms)
             {
@@ -306,6 +307,7 @@ namespace PsychoticLab
                     break;
             }
             GetRandomizedPartsIndexes();
+            onCharacterCreated.RaiseEvent();
         }
 
         // randomization method based on previously selected variables

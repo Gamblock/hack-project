@@ -1,0 +1,142 @@
+fileFormatVersion: 2
+guid: 793581fe4db4574438b4fe537d234044
+timeCreated: 1604981333
+licenseType: Store
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: SM_Prop_Dwarf_Base
+    100002: SM_Prop_Dwarf_Cog
+    100004: //RootNode
+    100006: SM_Prop_Dwarf_Crank
+    100008: SM_Prop_Dwarf_Pulley_1
+    100010: SM_Prop_Dwarf_Pulley_2
+    100012: SM_Prop_Dwarf_Pulley_3
+    100014: SM_Prop_Dwarf_Rope
+    100016: SM_Prop_Dwarf_Wheel_1
+    100018: SM_Prop_Dwarf_Wheel_2
+    100020: SM_Prop_Dwarf_Wheel_3
+    100022: SM_Prop_Dwarf_Wheel_4
+    400000: SM_Prop_Dwarf_Base
+    400002: SM_Prop_Dwarf_Cog
+    400004: //RootNode
+    400006: SM_Prop_Dwarf_Crank
+    400008: SM_Prop_Dwarf_Pulley_1
+    400010: SM_Prop_Dwarf_Pulley_2
+    400012: SM_Prop_Dwarf_Pulley_3
+    400014: SM_Prop_Dwarf_Rope
+    400016: SM_Prop_Dwarf_Wheel_1
+    400018: SM_Prop_Dwarf_Wheel_2
+    400020: SM_Prop_Dwarf_Wheel_3
+    400022: SM_Prop_Dwarf_Wheel_4
+    2300000: SM_Prop_Dwarf_Base
+    2300002: SM_Prop_Dwarf_Cog
+    2300004: //RootNode
+    2300006: SM_Prop_Dwarf_Crank
+    2300008: SM_Prop_Dwarf_Pulley_1
+    2300010: SM_Prop_Dwarf_Pulley_2
+    2300012: SM_Prop_Dwarf_Pulley_3
+    2300014: SM_Prop_Dwarf_Rope
+    2300016: SM_Prop_Dwarf_Wheel_1
+    2300018: SM_Prop_Dwarf_Wheel_2
+    2300020: SM_Prop_Dwarf_Wheel_3
+    2300022: SM_Prop_Dwarf_Wheel_4
+    3300000: SM_Prop_Dwarf_Base
+    3300002: SM_Prop_Dwarf_Cog
+    3300004: //RootNode
+    3300006: SM_Prop_Dwarf_Crank
+    3300008: SM_Prop_Dwarf_Pulley_1
+    3300010: SM_Prop_Dwarf_Pulley_2
+    3300012: SM_Prop_Dwarf_Pulley_3
+    3300014: SM_Prop_Dwarf_Rope
+    3300016: SM_Prop_Dwarf_Wheel_1
+    3300018: SM_Prop_Dwarf_Wheel_2
+    3300020: SM_Prop_Dwarf_Wheel_3
+    3300022: SM_Prop_Dwarf_Wheel_4
+    4300000: SM_Prop_Dwarf_Crane_01
+    4300002: SM_Prop_Dwarf_Base
+    4300004: SM_Prop_Dwarf_Cog
+    4300006: SM_Prop_Dwarf_Crank
+    4300008: SM_Prop_Dwarf_Wheel_1
+    4300010: SM_Prop_Dwarf_Wheel_2
+    4300012: SM_Prop_Dwarf_Wheel_3
+    4300014: SM_Prop_Dwarf_Wheel_4
+    4300016: SM_Prop_Dwarf_Pulley_1
+    4300018: SM_Prop_Dwarf_Pulley_2
+    4300020: SM_Prop_Dwarf_Pulley_3
+    4300022: SM_Prop_Dwarf_Rope
+  materials:
+    importMaterials: 0
+    materialName: 1
+    materialSearch: 2
+  animations:
+    legacyGenerateAnimations: 0
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 5
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

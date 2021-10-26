@@ -42,7 +42,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-
+*.db
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
@@ -74,3 +74,4 @@ version.properties
 # Articy Plugin
 # =====================================
 Assets/ArticyImporter/Content/Generated/
+Library/

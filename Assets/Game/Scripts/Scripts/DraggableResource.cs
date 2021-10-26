@@ -15,6 +15,7 @@ public class DraggableResource : MonoBehaviour
     private Vector3 startingPosition;
     private bool hoveringOverSlot;
     private bool followingCursor;
+    private bool colliding;
 
     private void Start()
     {
@@ -23,6 +24,10 @@ public class DraggableResource : MonoBehaviour
 
     void Update()
     {
+        if (!Input.GetMouseButton(0) && !colliding && transform.position != startingPosition)
+        {
+            ReturnToStartingPos();
+        }
         if (is3D)
         {
             if (Input.GetMouseButton(0))
@@ -53,7 +58,6 @@ public class DraggableResource : MonoBehaviour
             }
 
         }
-
         if (followingCursor)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -66,6 +70,23 @@ public class DraggableResource : MonoBehaviour
     {
         transform.position = startingPosition;
     }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.collider.gameObject.CompareTag("UIContainer"))
+        {
+            colliding = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.collider.gameObject.CompareTag("UIContainer"))
+        {
+            colliding = false;
+        }
+    }
+
     static List<RaycastResult> GetEventSystemRaycastResults()
     {
         PointerEventData eventData = new PointerEventData(EventSystem.current);

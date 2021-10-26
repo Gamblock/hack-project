@@ -28,8 +28,25 @@ public class StatsUI : MonoBehaviour
    public List<StatTypesToUse> statsTouse;
    public VerticalLayoutGroup statsUIGroup;
    public TextMeshProUGUI textPrefab;
-   
+   public TextMeshProUGUI nameText;
 
+
+   public void ShowName()
+   {
+      nameText.text = characterInfoSo.charNAme;
+   }
+   public void ShowStats(CharacterInfoSO charSO)
+   {
+      nameText.text = charSO.charNAme;
+      foreach (var stat in charSO.characterStats)
+      {
+         Debug.Log(stat.statToUse);
+         
+         TextMeshProUGUI text = Instantiate(textPrefab, statsUIGroup.transform);
+         text.text = stat.statToUse.ToString() + " " + stat.StatValue;
+      }
+      
+   }
    public void RandomizeStats(int median, int range, List<TypeEnums.ResourceTypes> resourcesUsed)
    {
       foreach (var res in resourcesUsed)

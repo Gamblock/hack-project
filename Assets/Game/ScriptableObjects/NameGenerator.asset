@@ -12,22 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe98494faea09924b9a60b6b603f4962, type: 3}
   m_Name: NameGenerator
   m_EditorClassIdentifier: 
-  finalName: uglysnifferless
+  charachter: {fileID: 11400000, guid: 159468966af72c64ba1a202c94f4fca1, type: 2}
+  finalName: kirkermer
   namePartsList:
   - resourceType: 0
     nameParts:
-    - retarded
-    - ugly
-    - autistic
-    - pussy
+    - wat
+    - kir
+    - bla
+    - ista
+    - miv
+    - bil
   - resourceType: 1
     nameParts:
-    - weak
-    - fart
-    - sniffer
-    - crackhead
+    - thet
+    - san
+    - ilk
+    - ner
+    - mer
+    - has
+    - kri
   - resourceType: 2
     nameParts:
-    - virgin
-    - ass
-    - fag
+    - bis
+    - vel
+    - ker
+    - mas
+    - los
+    - lior
