@@ -14,6 +14,18 @@ public class CharacterInfoSO : ScriptableObject
     public List<int> objectIndexes;
     public List<StatTypesToUse> characterStats;
     public string charNAme;
+    public TypeEnums.ClassTypes classType;
+    public Texture2D cardTexture;
+
+    public void ClearTemplate()
+    {
+        id = Guid.NewGuid().ToString();
+        objectIndexes.Clear();
+        characterStats.Clear();
+        charNAme = "";
+        cardTexture = null;
+    }
     
 }
+
 

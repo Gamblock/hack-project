@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe98494faea09924b9a60b6b603f4962, type: 3}
   m_Name: NameGenerator
   m_EditorClassIdentifier: 
-  charachter: {fileID: 11400000, guid: a71f35f4a5352b3438fc1dab8fc7e4f9, type: 2}
-  finalName: kirkermer
+  charachter: {fileID: 11400000, guid: cce607b8229572244812726b12f3537c, type: 2}
+  finalName: istahasker
   namePartsList:
   - resourceType: 0
     nameParts:

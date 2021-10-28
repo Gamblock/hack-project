@@ -18,5 +18,11 @@ public class TypeEnums : ScriptableObject
       fire
    }
 
+   public enum ClassTypes
+   {
+      DamageDealer,
+      Tank,
+      Healer
+   }
    
 }

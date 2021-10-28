@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,36 +19,28 @@ public struct ResourceInfluence
 public class StatTypesToUse
 {
    public TypeEnums.StatTypes statToUse;
-  
+  [ReadOnly]
    public int StatValue;
+}
+
+[Serializable]
+public class StatUIElement
+{
+   public TextMeshProUGUI text;
+   public TypeEnums.StatTypes statType;
 }
 public class StatsUI : MonoBehaviour
 {
-   public CharacterInfoSO characterInfoSo;
+   public List<StatUIElement> uiElements;
    public List<ResourceInfluence> influences;
    public List<StatTypesToUse> statsTouse;
-   public VerticalLayoutGroup statsUIGroup;
-   public TextMeshProUGUI textPrefab;
-   public TextMeshProUGUI nameText;
+   public TextMeshProUGUI classText;
+   public LoadoutSpawner loadoutSpawner;
 
 
-   public void ShowName()
-   {
-      nameText.text = characterInfoSo.charNAme;
-   }
-   public void ShowStats(CharacterInfoSO charSO)
-   {
-      nameText.text = charSO.charNAme;
-      foreach (var stat in charSO.characterStats)
-      {
-         Debug.Log(stat.statToUse);
-         
-         TextMeshProUGUI text = Instantiate(textPrefab, statsUIGroup.transform);
-         text.text = stat.statToUse.ToString() + " " + stat.StatValue;
-      }
-      
-   }
-   public void RandomizeStats(int median, int range, List<TypeEnums.ResourceTypes> resourcesUsed)
+  
+  
+   public void RandomizeStats(int median, int range, List<TypeEnums.ResourceTypes> resourcesUsed,CharacterInfoSO character)
    {
       foreach (var res in resourcesUsed)
       {
@@ -81,9 +74,50 @@ public class StatsUI : MonoBehaviour
 
       foreach (var stat in statsTouse)
       {
-         characterInfoSo.characterStats.Add(stat);
-         TextMeshProUGUI text = Instantiate(textPrefab, statsUIGroup.transform);
-         text.text = stat.statToUse.ToString() + " " + stat.StatValue;
+         foreach (var element in uiElements)
+         {
+            if (stat.statToUse == element.statType)
+            {
+               character.characterStats.Add(stat);
+               element.text.text = stat.StatValue.ToString();
+            }
+         }
       }
+
+      int index = 0;
+      int largerValue = 0;
+      
+      for (int i = 0; i < statsTouse.Count; i++)
+      {
+         if (statsTouse[i].StatValue > largerValue)
+         {
+            Debug.Log(statsTouse[i].statToUse);
+            largerValue = statsTouse[i].StatValue;
+            index = i;
+         }
+      }
+
+      Debug.Log(statsTouse[index].statToUse);
+   
+      if (statsTouse[index].statToUse == TypeEnums.StatTypes.armor)
+      {
+         character.classType = TypeEnums.ClassTypes.Tank;
+         classText.text = TypeEnums.ClassTypes.Tank.ToString();
+         loadoutSpawner.SpawnLoadOut(TypeEnums.ClassTypes.Tank);
+      }
+      if (statsTouse[index].statToUse == TypeEnums.StatTypes.health)
+      {
+         character.classType = TypeEnums.ClassTypes.Healer;
+         classText.text = TypeEnums.ClassTypes.Healer.ToString();
+         loadoutSpawner.SpawnLoadOut(TypeEnums.ClassTypes.Healer);
+      }
+      if (statsTouse[index].statToUse== TypeEnums.StatTypes.strength)
+      {
+         character.classType = TypeEnums.ClassTypes.DamageDealer;
+         classText.text = TypeEnums.ClassTypes.DamageDealer.ToString();
+         loadoutSpawner.SpawnLoadOut(TypeEnums.ClassTypes.DamageDealer);
+      }
+      
+      
    }
 }

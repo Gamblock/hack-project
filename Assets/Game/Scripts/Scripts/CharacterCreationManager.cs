@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using PsychoticLab;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class CharacterCreationManager : MonoBehaviour
 {
@@ -17,52 +19,53 @@ public class CharacterCreationManager : MonoBehaviour
    public int medianStatValue;
    public TextMeshProUGUI nameText;
    public NameGenerator nameGenerator;
-   public VoidEventChannelSO onCharacterCreated;
-   public Storage storage;
-   public ResourceController resourceController;
+   public CanvasGroup errorTextGroup;
+   public CanvasGroup characterCreationMenu;
+   public CharacterInfoSO character;
+   public Button continueButton;
+   public CanvasGroup createdCharacterUI;
 
-   private List<TypeEnums.ResourceTypes> currentSelectedResources = new List<TypeEnums.ResourceTypes>();
+   public CurrentSelectedResourcesSO currentSelectedResourcesSo;
    private bool characterIsCreated;
 
-   private void Start()
+
+   private void Awake()
    {
-       resourceController.ShowResourceValues();
+       currentSelectedResourcesSo.selectedResourcesList.Clear();
+       character.ClearTemplate();
    }
 
-   private void OnEnable()
+   private void Update()
    {
-       onCharacterCreated.OnEventRaised += OnCharacterCreated;
-   }
-
-   private void OnDisable()
-   {
-       onCharacterCreated.OnEventRaised -= OnCharacterCreated;
-   }
-
-   public void OnCharacterCreated()
-   {
-       characterIsCreated = true;
-   }
-   public void ManageObjectList(bool addToList, TypeEnums.ResourceTypes resourceType)
-   {
-       if (!characterIsCreated)
+       if (currentSelectedResourcesSo.selectedResourcesList.Count == numberOfSlots)
        {
-           if (addToList)
-           {
-               currentSelectedResources.Add(resourceType);
-           }
-           else
-           {
-               currentSelectedResources.Remove(resourceType);
-           }
+           continueButton.interactable = true;
+       }
+       else
+       {
+           continueButton.interactable = false;
+       }
+   }
 
-           if (numberOfSlots <= currentSelectedResources.Count)
-           {
-               statsUI.RandomizeStats(medianStatValue,statRange, currentSelectedResources);
-               randomizer.Randomize();
-               nameText.text = nameGenerator.GenerateRandomName(currentSelectedResources);
-               storage.SaveCharacter(randomizer.characterInfoSo);
-           } 
+   public async void CreateCharacter()
+   {
+       if (currentSelectedResourcesSo.selectedResourcesList.Count == numberOfSlots)
+       {
+           statsUI.RandomizeStats(medianStatValue,statRange, currentSelectedResourcesSo.selectedResourcesList, character);
+           randomizer.Randomize();
+           nameText.text = nameGenerator.GenerateRandomName(currentSelectedResourcesSo.selectedResourcesList);
+           characterCreationMenu.alpha = 0;
+           characterCreationMenu.interactable = false;
+           createdCharacterUI.alpha = 1;
+           await Task.Delay(TimeSpan.FromSeconds(0.05));
+           ScreenCapturer.TakeScreenShot_Static(400,540);
+       }
+       else
+       {
+           errorTextGroup.alpha = 1;
+           errorTextGroup.GetComponentInChildren<TextMeshProUGUI>().text = "You need to select 3 resource types";
+           await Task.Delay(TimeSpan.FromSeconds(3));
+           errorTextGroup.alpha = 0;
        }
    }
 }

@@ -10,4 +10,9 @@ public class SceneControllerSO : ScriptableObject
     {
         SceneManager.LoadScene(sceneIndex);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

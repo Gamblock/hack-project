@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cb74a60c88d47c59f00e35977b6d7b7, type: 3}
-  m_Name: ProcessorsSettings
+  m_Script: {fileID: 11500000, guid: d364a85b39b3d5d4e88647e588b2104e, type: 3}
+  m_Name: lastTest
   m_EditorClassIdentifier: 
-  RunFoldersProcessor: 0
-  RunDoozyAssetsProcessor: 0
+  id: fe4db435-0c2d-4f7c-8694-4bb5eceda8d2
+  objectIndexes: 
+  characterStats: []
+  charNAme: 
+  classType: 0
+  cardTexture: {fileID: 0}

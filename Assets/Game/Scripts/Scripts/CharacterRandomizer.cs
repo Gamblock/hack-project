@@ -61,7 +61,7 @@ namespace PsychoticLab
 
 
         public CharacterInfoSO characterInfoSo;
-        public VoidEventChannelSO onCharacterCreated;
+       
 
         public bool setupCamera;
         // list of enabed objects on character
@@ -306,7 +306,6 @@ namespace PsychoticLab
                     break;
             }
             GetRandomizedPartsIndexes();
-            onCharacterCreated.RaiseEvent();
         }
 
         // randomization method based on previously selected variables
