@@ -6,25 +6,35 @@ TagManager:
   tags:
   - Dragable
   - UIContainer
+  - Flammable
+  - FlameThrow
+  - NoForcePDM
+  - Grass
+  - Freezable
+  - Conductor
+  - Flamer
+  - PPaint
+  - Butter
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Conductor
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Tornado
+  - Flamer
+  - Flammable
+  - Grass
+  - Butter
+  - Freezable
+  - PPaint
+  - FlameThrow
+  - VortexSafe
+  - NoForcePDM
+  - PDM_Batch_Pool
+  - PDM_Batch_Pool_Break
   - 
   - 
   - 
