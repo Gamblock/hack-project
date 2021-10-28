@@ -14,4 +14,6 @@ public class CharacterInfoSO : ScriptableObject
     public List<int> objectIndexes;
     public List<StatTypesToUse> characterStats;
     public string charNAme;
+    
 }
+

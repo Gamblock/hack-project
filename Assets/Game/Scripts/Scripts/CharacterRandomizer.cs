@@ -114,8 +114,7 @@ namespace PsychoticLab
             for (int i = 0; i < allAvaliablePartsList.Count; i++)
             {
                 if (allAvaliablePartsList[i].activeSelf && allAvaliablePartsList[i].gameObject.name.Contains("Chr_"))
-                {
-                   
+                { 
                     characterInfoSo.objectIndexes.Add(i);
                 }
             }

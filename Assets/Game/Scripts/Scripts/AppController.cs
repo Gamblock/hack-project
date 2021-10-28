@@ -16,6 +16,11 @@ public class AppController : MonoBehaviour
    public StatsUI statsUI;
    
 
+   public void ShowEmail(string email)
+   {
+      Debug.Log(email);
+   }
+
    private void Start()
    {
 

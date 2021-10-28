@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49310955e7ab61a48b425dc8e8778e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterInfoSo: {fileID: 11400000, guid: 4d5a55ff842f86142bf02ab05047e240, type: 2}
+  characterInfoSo: {fileID: 11400000, guid: 3870ed373f51a96469ac8b5397011295, type: 2}
 --- !u!1 &127197973
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 452483803}
   - component: {fileID: 452483802}
   - component: {fileID: 452483804}
+  - component: {fileID: 452483805}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -482,6 +483,22 @@ MonoBehaviour:
   fireText: {fileID: 1319282794}
   earthText: {fileID: 1319282794}
   storage: {fileID: 11400000, guid: 5570fd8214edd9a439b5ff33a6b9b52e, type: 2}
+--- !u!114 &452483805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452483801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ba8f597d0dbc1448d0f589454b12c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userEmail: admin@admin.com
+  userPassword: admin
+  password: {fileID: 11400000, guid: 586f2a05cfd0d6143909faf1f90571ff, type: 2}
+  character: {fileID: 11400000, guid: 3870ed373f51a96469ac8b5397011295, type: 2}
 --- !u!1 &474226368
 GameObject:
   m_ObjectHideFlags: 0

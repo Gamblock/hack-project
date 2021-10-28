@@ -16752,7 +16752,7 @@ MonoBehaviour:
   - {r: 0.5294118, g: 0.30980393, b: 0.64705884, a: 0}
   - {r: 0.86666673, g: 0.77647066, b: 0.25490198, a: 0}
   - {r: 0.2392157, g: 0.45882356, b: 0.81568635, a: 0}
-  characterInfoSo: {fileID: 11400000, guid: 4d5a55ff842f86142bf02ab05047e240, type: 2}
+  characterInfoSo: {fileID: 11400000, guid: a71f35f4a5352b3438fc1dab8fc7e4f9, type: 2}
   onCharacterCreated: {fileID: 11400000, guid: 7c9d7b3498b15d24c872fbed9d6a6255, type: 2}
   setupCamera: 1
   enabledObjects: []
@@ -16816,7 +16816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0dc2142aa3cc14da8a003d48ab8018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterInfoSo: {fileID: 11400000, guid: 4d5a55ff842f86142bf02ab05047e240, type: 2}
+  characterInfoSo: {fileID: 11400000, guid: a71f35f4a5352b3438fc1dab8fc7e4f9, type: 2}
   influences:
   - typeOfResource: 0
     statToInfluence: 0
