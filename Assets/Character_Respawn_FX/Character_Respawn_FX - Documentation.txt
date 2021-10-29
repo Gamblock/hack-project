@@ -1,0 +1,32 @@
+For an example scene for each of the three respawn fx (lightning, smoke and teleport), load the corresponding .unity example scene. Pressing the left mouse button will trigger the respawn sequence effects. Alternatively, drag the required example character from the Prefabs folder in the Project window into the Hierarchy window.
+
+A controllable character as seen in the example video has not been included with this package as the Asset Store asks for the Standard Assets not to be included to avoid potential compatibility issues. However, step by step instructions are included here to get a demo character set up:
+
+1. First load "Character_Respawn_FX_Smoke.unity" for a demo environment to place your character in. Delete the "Demo_Man_Smoke" GameObject (in the hierarchy window).
+
+2. Import the Character Standard Assets into your scene (from the top menu: Assets -> Import Package -> Characters). The Standard Assets can be found for free on the Unity Asset Store.
+
+3. Add the ThirdPersonController to the your scene; drag it from the Project window (in Standard Assets -> Characters -> ThirdPersonCharacter -> Prefabs -> ThirdPersonController) into the Hierarchy window. Check its Position and Rotation transforms are all at 0 (in the Inspector  window).
+
+4. Drag either the RespawnSmokeFX, RespawnTeleportFX or RespawnLightningtFX from the Prefabs folder in the Project window onto the root node of your character model in the hierarchy window.
+
+5. Create a Unity gameobject, reset all the transforms to 0 (in the Inspector window), rename it to CharacterGeometry, than drag it into your Character group in the Hierarchy window. Then drag all the character meshes into this new gameobject. For example, drag EthanBody and EthanGlasses into CharacterGeometry if using the Unity's Standard Assets ThirdPersonController.
+
+6. Next, copy the corresponding scipt (CharacterRespawnSmoke, CharacterRespawnTeleport or CharacterRespawnLightning) from the Scripts folder onto the root of your character model.
+
+7. Select your character model in the hierarchy window, then in Inspector window (on the right), scroll to the bottom to find the script you've just added. Drag the effects gameobject that you added to you character in step 1 into the FX slot in the script (ie, for RespawnSmokeFX drag the RespawnSmokeFX gameobject from the character group into the "Respawn Smoke FX" script slot).
+
+8. For the teleport and lightning effects you also need to copy the dynamic light into the next slot in the script (ie, for RespawnLightningtFX, expand out the group to see its children in the hierarchy window, then drag Lightning_Light into the respective script slot in the Inspector window).
+
+9. Next, drag the gameobject CharacterGeometry (created in step 2) into the Character Geometry script slot.
+
+10. If your character has a skinned mesh you'll want to change the smoke particles of each effect to use Skinned Mesh Renderer so the particles come from the mesh of the character instead of a basic sphere. For RespawnSmokeFX the smoke effect to change is called Black_Smoke_Particles. For RespawnTeleportFX the smoke effect to change is called Teleport_Smoke_Particles. For RespawnLightningtFX the smoke effect to change is called Smoke_Particles. Select the smoke effect used in the Respawn effect group in the Hierarchy  window, then in the Inspector window, scroll down to Shape, then change Sphere to "Skinned Mesh Renderer". Then next to Mesh, click the circle on the right to bring up the selector and select the characters skinned mesh.
+
+
+Have fun!
+
+Also avaiable is the Character Death FX pack: https://www.assetstore.unity3d.com/#!/content/98428
+
+Thanks for purchasing this asset - please consider rating or writing a review about it. If you have any questions then don't hesitate to get in touch at bendurrant@rivermillstudios.com 
+
+If you use this or any of Rivermill Studios other assets then we'd love to know (and help you promote them!).
