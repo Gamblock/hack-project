@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Game/Scenes/CharacterCreation.unity
     guid: 8607dc9179698484d986a29abf13d358
+  - enabled: 0
+    path: Assets/Game/Scenes/Test.unity
+    guid: 9222d00b1111f634a9f363f258277cc5
+  - enabled: 0
+    path: Assets/Game/Scripts/BattleSystem/CardScreenShoter.unity
+    guid: 1bd5f3fa74bec5442b61314cd663c28a
   m_configObjects: {}

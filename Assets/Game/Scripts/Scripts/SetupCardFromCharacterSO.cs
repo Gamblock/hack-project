@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SetupCardFromCharacterSO : MonoBehaviour
 {
+    public ServerCommunicationManager serverManager;
     public TextMeshProUGUI damage;
     public TextMeshProUGUI armor;
     public TextMeshProUGUI health;
@@ -13,8 +14,9 @@ public class SetupCardFromCharacterSO : MonoBehaviour
     public TextMeshProUGUI className;
     public RawImage cardImage;
     public CanvasGroup cardCanvasGroup;
+    public CharacterInfoSO character;
 
-    public void SetUpCard(CharacterInfoSO characterInfoSo)
+    public void SetUpCard(CharacterInfoSO characterInfoSo, RawImage image)
     {
         foreach (var stat in characterInfoSo.characterStats)
         {
@@ -34,8 +36,40 @@ public class SetupCardFromCharacterSO : MonoBehaviour
 
         name.text = characterInfoSo.charNAme;
         className.text = characterInfoSo.classType.ToString();
-        cardImage.texture = characterInfoSo.cardTexture;
+       
         cardCanvasGroup.alpha = 1;
+    }
+
+    public void SetupCardFromServer()
+    {
+        serverManager.GetAllDataFromServer(cardImage,character);
+        foreach (var stat in character.characterStats)
+        {
+            if (stat.statToUse == TypeEnums.StatTypes.armor)
+            {
+                armor.text = stat.StatValue.ToString();
+            }
+            if (stat.statToUse == TypeEnums.StatTypes.health)
+            {
+                health.text = stat.StatValue.ToString();
+            }
+            if (stat.statToUse == TypeEnums.StatTypes.strength)
+            {
+                damage.text = stat.StatValue.ToString();
+            }
+        }
+
+        name.text = character.charNAme;
+        className.text = character.classType.ToString();
+        cardCanvasGroup.alpha = 1;
+    }
+    public Texture2D ReadTexture()
+    {
+        string base64 = PlayerPrefs.GetString("KEY");
+        byte[] bytes = System.Convert.FromBase64String(base64);
+        Texture2D tex = new Texture2D(400, 540);
+        tex.LoadImage(bytes);
+        return tex;
     }
 
 }

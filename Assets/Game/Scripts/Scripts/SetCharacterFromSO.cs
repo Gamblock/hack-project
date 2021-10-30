@@ -6,6 +6,7 @@ using UnityEngine;
 public class SetCharacterFromSO : MonoBehaviour
 {
    public CharacterInfoSO characterInfoSo;
+   public ServerCommunicationManager serverManager;
    
    private List<GameObject> allParts = new List<GameObject>();
    private List<GameObject> activePartsToSave = new List<GameObject>();
@@ -27,8 +28,9 @@ public class SetCharacterFromSO : MonoBehaviour
          }
       }
    }
-   
 
+
+  
    public void SaveActiveParts(CharacterInfoSO charInfoSO)
    {   
       charInfoSO.objectIndexes.Clear();
@@ -56,7 +58,7 @@ public class SetCharacterFromSO : MonoBehaviour
    
    public void SetCharacter()
    {
-      
+      serverManager.GetCharacterFromServer(characterInfoSo);
       foreach (var index in characterInfoSo.objectIndexes)
       {
         
