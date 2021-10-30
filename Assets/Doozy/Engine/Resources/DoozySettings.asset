@@ -40,12 +40,12 @@ MonoBehaviour:
   DebugUIToggle: 0
   DebugUIView: 0
   DebugUIViewListener: 0
-  DOTweenDetected: 0
-  DoozyUIVersion3Detected: 0
+  DOTweenDetected: 1
+  DoozyUIVersion3Detected: 1
   DoozyUIVersion2Detected: 0
   MasterAudioDetected: 0
   PlaymakerDetected: 0
-  TextMeshProDetected: 0
+  TextMeshProDetected: 1
   IgnoreUnityTimescale: 1
   SpeedBasedAnimations: 0
   UseBackButton: 1
@@ -53,5 +53,5 @@ MonoBehaviour:
   UseOrientationDetector: 0
   UsePlaymaker: 0
   UseTextMeshPro: 0
-  AssetDatabaseSaveAssetsNeeded: 0
+  AssetDatabaseSaveAssetsNeeded: 1
   AssetDatabaseRefreshNeeded: 0
