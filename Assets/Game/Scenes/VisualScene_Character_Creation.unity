@@ -7054,7 +7054,6 @@ RectTransform:
   - {fileID: 422407737}
   - {fileID: 1212807452}
   - {fileID: 1797050969}
-  - {fileID: 784223582}
   m_Father: {fileID: 1358070911}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10061,112 +10060,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4684897327074620, guid: 275ce8159925c14489d0467d0e9ac9c0, type: 3}
   m_PrefabInstance: {fileID: 774928464}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &784223581
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 517896958}
-    m_Modifications:
-    - target: {fileID: 5295328733430311172, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_text
-      value: Test
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733430311172, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_textAlignment
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733430311172, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_TextStyleHashCode
-      value: -1183493901
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733430311172, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733430311172, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 996328158}
-    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: delay
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ServerCommunicationManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 143.39981
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -28.870132
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 624.2999
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 68
-      objectReference: {fileID: 0}
-    - target: {fileID: 5295328733772924257, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-      propertyPath: m_Name
-      value: MintNFT (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
---- !u!224 &784223582 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
-  m_PrefabInstance: {fileID: 784223581}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &799101670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13078,9 +12971,10 @@ MonoBehaviour:
   nameGenerator: {fileID: 11400000, guid: cae5e6485c9e0494e804f0e78106f0c8, type: 2}
   errorTextGroup: {fileID: 4169024316432336841}
   characterCreationMenu: {fileID: 1304119452}
-  character: {fileID: 11400000, guid: cce607b8229572244812726b12f3537c, type: 2}
+  character: {fileID: 11400000, guid: 0e678c72a4fb8e249859fac77114e641, type: 2}
   continueButton: {fileID: 705520947}
   createdCharacterUI: {fileID: 517896959}
+  cardSetup: {fileID: 0}
   currentSelectedResourcesSo: {fileID: 11400000, guid: 66500aa83a55161498efe01715c6e5ba, type: 2}
 --- !u!4 &996328156
 Transform:
@@ -13129,8 +13023,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userEmail: admin@admin.com
   userPassword: admin
+  onServerDataNotFound: {fileID: 11400000, guid: efc97161495a1af4c999eb3e87bcef6a, type: 2}
   password: {fileID: 11400000, guid: 586f2a05cfd0d6143909faf1f90571ff, type: 2}
-  character: {fileID: 11400000, guid: cce607b8229572244812726b12f3537c, type: 2}
+  character: {fileID: 11400000, guid: 0e678c72a4fb8e249859fac77114e641, type: 2}
 --- !u!1001 &1006038664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16258,7 +16153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -16283,6 +16178,10 @@ PrefabInstance:
     - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SceneControllerSO, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -28194,7 +28093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MintNFT
+      value: MintNft
       objectReference: {fileID: 0}
     - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -28242,7 +28141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 225
+      value: 142
       objectReference: {fileID: 0}
     - target: {fileID: 5295328733772924257, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
       propertyPath: m_Name

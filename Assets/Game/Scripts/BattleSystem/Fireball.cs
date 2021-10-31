@@ -7,14 +7,17 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
    public float flySpeed = 10;
-   public IntEventChannelSO onFireballHit;
+   public IntEventChannelSO onFireballHitPlayer;
+   public IntEventChannelSO onFireballHitEnemy;
    public ParticleSystem explosion;
    private Transform enemy;
    private bool isFlying;
    private float leeway = 0.25f;
    private int damageToDeal;
-   public void Shoot(Transform enemyTransform, int damage)
+   private bool castByPlayer;
+   public void Shoot(Transform enemyTransform, int damage, bool isPlayer)
    {
+      castByPlayer = isPlayer;
       enemy = enemyTransform;
       isFlying = true;
       damageToDeal = damage;
@@ -36,7 +39,15 @@ public class Fireball : MonoBehaviour
    public void HitOponent()
    {
       isFlying = false;
-      onFireballHit.RaiseEvent(damageToDeal);
+      if (!castByPlayer)
+      {
+         onFireballHitPlayer.RaiseEvent(damageToDeal);
+      }
+      else
+      {
+         onFireballHitEnemy.RaiseEvent(damageToDeal);
+      }
+     
       Instantiate(explosion.gameObject, transform.position, Quaternion.identity);
       Destroy(gameObject);
    }

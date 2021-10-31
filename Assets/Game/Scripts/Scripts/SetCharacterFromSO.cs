@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SetCharacterFromSO : MonoBehaviour
 {
    public CharacterInfoSO characterInfoSo;
    public ServerCommunicationManager serverManager;
+   public BattleSystemUISetup battleUI;
    
    private List<GameObject> allParts = new List<GameObject>();
    private List<GameObject> activePartsToSave = new List<GameObject>();
@@ -29,8 +31,12 @@ public class SetCharacterFromSO : MonoBehaviour
       }
    }
 
+   private void Start()
+   {
+      SetCharacter();
+   }
 
-  
+
    public void SaveActiveParts(CharacterInfoSO charInfoSO)
    {   
       charInfoSO.objectIndexes.Clear();
@@ -56,9 +62,11 @@ public class SetCharacterFromSO : MonoBehaviour
       }
    }
    
-   public void SetCharacter()
+   public async void SetCharacter()
    {
+      await Task.Delay(TimeSpan.FromSeconds(0.5));
       serverManager.GetCharacterFromServer(characterInfoSo);
+      battleUI.SetUIButtons(characterInfoSo);
       foreach (var index in characterInfoSo.objectIndexes)
       {
         

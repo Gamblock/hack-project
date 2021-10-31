@@ -38,10 +38,10 @@ public class EnemyController : MonoBehaviour
        GameObject spikeGO = Instantiate(spike.gameObject, new Vector3(oponent.position.x, oponent.position.y + spikeYOffset, oponent.position.z), Quaternion.identity);
        onPlayerDamaged.RaiseEvent(spikeDamage);
    }
-   public void FireballAttack()
+   public void EnemyFireballAttack()
    {
        fireball = Instantiate(fireballPrefab.gameObject, castingHandTransform.position, Quaternion.identity).GetComponent<Fireball>();
-       fireball.Shoot(oponent,fireballDamage);
+       fireball.Shoot(oponent,fireballDamage,false);
    }
 
    public void UseRandomAttack()

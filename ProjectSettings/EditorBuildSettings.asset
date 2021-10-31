@@ -11,13 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/VisualScene_Character_Creation.unity
     guid: 78903a0348993de40886fdf421551260
+  - enabled: 1
+    path: Assets/Game/Scenes/(FOR GD) VisualScene_Boss_Fight.unity
+    guid: db34beaa718c6b04b91f792545dcbbef
   - enabled: 0
-    path: Assets/Game/Scenes/CharacterCreation.unity
-    guid: 8607dc9179698484d986a29abf13d358
-  - enabled: 0
-    path: Assets/Game/Scenes/Test.unity
-    guid: 9222d00b1111f634a9f363f258277cc5
-  - enabled: 0
-    path: Assets/Game/Scripts/BattleSystem/CardScreenShoter.unity
-    guid: 1bd5f3fa74bec5442b61314cd663c28a
+    path: Assets/Game/Scenes/BattleScene.unity
+    guid: 666ad800736cf3041b56778fec1d2419
   m_configObjects: {}

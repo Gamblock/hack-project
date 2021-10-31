@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DamageNumbersPro;
 using TMPro;
 using UnityEngine;
 
@@ -21,15 +22,15 @@ public class BattleSystem : MonoBehaviour
     public Transform playerPosition;
     public Transform enemyPosition;
     public BattleStates state;
-    public CanvasGroup tutorialCanvas;
+    public CanvasGroup winscreenCanvas;
     public IntEventChannelSO onPlayerTakeDamage;
     public IntEventChannelSO onEnemyTakeDamage;
-
+    public DamageNumber damageNumbers;
+    public DamageNumber healingNumbers;
     public CanvasGroup playerActionsUI;
 
     private BattleUnit playerUnit;
     private BattleUnit enemyUnit;
-    private GameObject player;
     private GameObject enemy;
     private PlayerController playerController;
     private EnemyController enemyController;
@@ -61,19 +62,17 @@ public class BattleSystem : MonoBehaviour
 
     public void SetUpBattle()
     {
-       player = Instantiate(playerPrefab, playerPosition.position, playerPosition.rotation);
-       enemy =  Instantiate(enemyPrefab, enemyPosition.position,enemyPosition.rotation);
-       playerController = player.GetComponent<PlayerController>();
+        enemy =  Instantiate(enemyPrefab, enemyPosition.position,enemyPosition.rotation); 
+        playerController = playerPrefab.GetComponent<PlayerController>();
        enemyController = enemy.GetComponent<EnemyController>();
        playerController.Init(enemy.transform);
-       enemyController.Init(player.transform);
-        playerUnit = player.GetComponent<BattleUnit>();
+       enemyController.Init(playerPrefab.transform);
+        playerUnit = playerPrefab.GetComponent<BattleUnit>();
         playerUnit.currentHp = playerUnit.hp;
-        player.GetComponent<BattleUI>().SetHud(playerUnit);
+        playerPrefab.GetComponent<BattleUI>().SetHud(playerUnit);
         enemyUnit = enemy.GetComponent<BattleUnit>();
         enemyUnit.currentHp = enemyUnit.hp;
         enemy.GetComponent<BattleUI>().SetHud(enemyUnit);
-       
         state = BattleStates.PlayerTurn;
         PlayerTurn();
     }
@@ -90,10 +89,12 @@ public class BattleSystem : MonoBehaviour
 
     public async void ShowTutorialWindow(string inputText,float showDuration)
     {
+        /*
         tutorialCanvas.GetComponentInChildren<TextMeshProUGUI>().text = inputText;
         tutorialCanvas.alpha = 1;
         await Task.Delay(TimeSpan.FromSeconds(showDuration));
         tutorialCanvas.alpha = 0;
+        */
     }
 
     private void StateChecker()
@@ -101,6 +102,8 @@ public class BattleSystem : MonoBehaviour
         if (enemyUnit.currentHp <= 0)
         {
             state = BattleStates.Won;
+            winscreenCanvas.interactable = true;
+            winscreenCanvas.alpha = 1;
         }
         else if(playerUnit.currentHp <= 0)
         {
@@ -122,20 +125,20 @@ public class BattleSystem : MonoBehaviour
     }
     public async void PlayerAttack()
     {
-        player.GetComponent<PlayerController>().AttackMelee();
+        playerPrefab.GetComponent<PlayerController>().AttackMelee();
         await Task.Delay(TimeSpan.FromSeconds(2));
-        state = BattleStates.EnemyTurn;
     }
 
     public void PlayerHealAttack()
     {
-        player.GetComponent<PlayerController>().HealerAttackStart();
+        playerPrefab.GetComponent<PlayerController>().HealerAttackStart();
     }
     public async void PlayerHeal()
     {
-        player.GetComponent<PlayerController>().HealerAbility();
+        playerPrefab.GetComponent<PlayerController>().HealerAbility();
         playerUnit.currentHp += 20;
         playerUnit.gameObject.GetComponent<BattleUI>().SetHP(playerUnit.currentHp);
+        healingNumbers.CreateNew(20,playerPrefab.transform.position);
         await Task.Delay(TimeSpan.FromSeconds(1));
         state = BattleStates.EnemyTurn;
     }
@@ -144,20 +147,24 @@ public class BattleSystem : MonoBehaviour
         enemyController.UseRandomAttack();
 
         await Task.Delay(TimeSpan.FromSeconds(2));
-        state = BattleStates.PlayerTurn;
+        
     }
 
     public void DamagePlayer(int damageValue)
     {
         playerUnit.currentHp = playerUnit.currentHp - damageValue;
         playerUnit.gameObject.GetComponent<BattleUI>().SetHP(playerUnit.currentHp);
-        player.GetComponent<PlayerController>().TakeDamage();
+        playerPrefab.GetComponent<PlayerController>().TakeDamage();
+        damageNumbers.CreateNew(damageValue, playerPrefab.transform.position);
+        state = BattleStates.PlayerTurn;
     } 
     public void DamageEnemy(int damageValue)
     {
         enemyUnit.currentHp = enemyUnit.currentHp - damageValue;
         enemyUnit.gameObject.GetComponent<BattleUI>().SetHP(enemyUnit.currentHp);
         enemy.GetComponent<EnemyController>().TakeDamage();
+        damageNumbers.CreateNew(damageValue, enemy.transform.position);
+        state = BattleStates.EnemyTurn;
     }
     
 }

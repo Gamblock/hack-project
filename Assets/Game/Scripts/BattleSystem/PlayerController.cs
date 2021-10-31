@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     public void HealerAttack()
     {
         fireball = Instantiate(fireball.gameObject, castingHandTransform.position, Quaternion.identity).GetComponent<Fireball>();
-        fireball.Shoot(oponent,20);
+        fireball.Shoot(oponent,20,true);
     }
     public void HealerAttackStart()
     {

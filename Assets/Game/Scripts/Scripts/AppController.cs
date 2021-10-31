@@ -21,7 +21,7 @@ public class AppController : MonoBehaviour
    private void OnEnable()
    {
        onServerDataNotFound.OnEventRaised += AllowCharacterCreation;
-      cardSetter.SetupCardFromServer();
+//      cardSetter.SetupCardFromServer();
    }
 
    private void OnDisable()

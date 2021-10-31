@@ -2715,7 +2715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outputImage: {fileID: 2036159415}
-  textureHolderSo: {fileID: 11400000, guid: 2b1699585dff59e4eb6688b7a41e34c4, type: 2}
+  textureHolderSo: {fileID: 11400000, guid: 3870ed373f51a96469ac8b5397011295, type: 2}
   key: KEY
 --- !u!1 &1910147851
 GameObject:
