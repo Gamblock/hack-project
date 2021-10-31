@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,16 +9,19 @@ public class ScreenShoter : MonoBehaviour
 {
     public RawImage img;
     public Vector2 widthHeight;
-    private void Update()
+    public bool isCard;
+    public CaptureScreenNonStatic capturer;
+
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-           
-        }
-            
+       CaptureScreenWithDelay();
     }
 
-
+    private async void CaptureScreenWithDelay()
+    {
+        await Task.Delay(TimeSpan.FromSeconds(1));
+        capturer.TakeScreenShot((int)widthHeight.x,(int)widthHeight.y);
+    }
     public void CaptureSpecificRect()
     {
         ScreenCapturer.TakeScreenShot_Static((int)widthHeight.x,(int)widthHeight.y);

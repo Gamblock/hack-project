@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,6 +16,11 @@ public class SetupCardFromCharacterSO : MonoBehaviour
     public RawImage cardImage;
     public CanvasGroup cardCanvasGroup;
     public CharacterInfoSO character;
+
+    private void Awake()
+    {
+        SetupCardFromServer();
+    }
 
     public void SetUpCard(CharacterInfoSO characterInfoSo, RawImage image)
     {

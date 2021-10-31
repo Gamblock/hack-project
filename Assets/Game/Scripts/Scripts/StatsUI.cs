@@ -91,7 +91,6 @@ public class StatsUI : MonoBehaviour
       {
          if (statsTouse[i].StatValue > largerValue)
          {
-            Debug.Log(statsTouse[i].statToUse);
             largerValue = statsTouse[i].StatValue;
             index = i;
          }

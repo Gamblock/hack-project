@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Image = UnityEngine.UIElements.Image;
 
 
 public class ServerCommunicationManager : MonoBehaviour
@@ -111,7 +112,7 @@ public class ServerCommunicationManager : MonoBehaviour
     {
         Debug.Log("Getting data");
         StartCoroutine(GetModelFromServer(characterInfoSo));
-        StartCoroutine(GetCardTextureByID(image));
+        StartCoroutine(GetTextureFromServer(image));
     }
     public void GetCharacterFromServer(CharacterInfoSO charachterToOverride)
     {
@@ -137,13 +138,16 @@ public class ServerCommunicationManager : MonoBehaviour
             }
             
         }
+        
+        
     }
-    IEnumerator GetCardTextureByID(RawImage image)
+    IEnumerator GetTextureFromServer(RawImage image)
     {
-        Debug.Log("https://binance-hack.herokuapp.com/modelImages/" + PlayerPrefs.GetString(modelIDKey) + ".png");
-        UnityWebRequest www = UnityWebRequestTexture.GetTexture("https://binance-hack.herokuapp.com/modelImages/" + PlayerPrefs.GetString(modelIDKey) + ".png");
-            
-        {      
+       
+        string ID = "";
+        using (UnityWebRequest www =
+            UnityWebRequest.Get("https://binance-hack.herokuapp.com/api/model/getModelByUserId/" + PlayerPrefs.GetString(userIDKey)))
+        {
             yield return www.SendWebRequest();
             if (www.result != UnityWebRequest.Result.Success)
             {
@@ -151,12 +155,15 @@ public class ServerCommunicationManager : MonoBehaviour
             }
             else
             {
-                image.texture = DownloadHandlerTexture.GetContent(www);
+                model = JsonUtility.FromJson<Model>(www.downloadHandler.text);
+                PlayerPrefs.SetString(modelIDKey,model._id);
+                UnityWebRequest image_www = UnityWebRequestTexture.GetTexture(model.base_image);
+                yield return image_www.SendWebRequest();
+                image.texture = DownloadHandlerTexture.GetContent(image_www);
             }
         }
-        
     }
-
+    
    
     
     public IEnumerator GetModelIDFromServerAndMint()
@@ -204,7 +211,8 @@ public class ServerCommunicationManager : MonoBehaviour
         public string name;
         public string description;
         public string unityGameModel;
-        public string image;
+        public string nft_image;
+        public string base_image;
         public bool printed;
         public string token;
         public string updatedAt;
