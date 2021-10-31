@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe98494faea09924b9a60b6b603f4962, type: 3}
   m_Name: NameGenerator
   m_EditorClassIdentifier: 
-  charachter: {fileID: 11400000, guid: cce607b8229572244812726b12f3537c, type: 2}
-  finalName: istahasker
+  charachter: {fileID: 11400000, guid: 0e678c72a4fb8e249859fac77114e641, type: 2}
+  finalName: blasanmas
   namePartsList:
   - resourceType: 0
     nameParts:

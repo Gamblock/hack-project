@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public VoidEventChannelSO onPlayerTurnFinished;
     private Transform oponent;
     private TypeEnums.ClassTypes classType;
-   
+    private Fireball _fireball;
 
     private void Update()
     {
@@ -46,11 +46,12 @@ public class PlayerController : MonoBehaviour
 
     public void HealerAttack()
     {
-        fireball = Instantiate(fireball.gameObject, castingHandTransform.position, Quaternion.identity).GetComponent<Fireball>();
-        fireball.Shoot(oponent,20,true);
+        _fireball = Instantiate(fireball.gameObject, castingHandTransform.position, Quaternion.identity).GetComponent<Fireball>();
+        _fireball.Shoot(oponent,20,true);
     }
     public void HealerAttackStart()
     {
+        Debug.Log("healer");
         playerAnimator.SetTrigger("HealerAttack");
     }
    public async void AttackMelee()

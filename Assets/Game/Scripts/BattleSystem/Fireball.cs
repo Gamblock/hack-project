@@ -10,6 +10,7 @@ public class Fireball : MonoBehaviour
    public IntEventChannelSO onFireballHitPlayer;
    public IntEventChannelSO onFireballHitEnemy;
    public ParticleSystem explosion;
+   public float yOffset = 1.5f;
    private Transform enemy;
    private bool isFlying;
    private float leeway = 0.25f;
@@ -27,10 +28,10 @@ public class Fireball : MonoBehaviour
    {
       if (isFlying)
       {
-         transform.position = Vector3.MoveTowards(transform.position, enemy.position, flySpeed);
+         transform.position = Vector3.MoveTowards(transform.position, new Vector3(enemy.position.x,enemy.position.y + yOffset, enemy.position.z), flySpeed);
       }
 
-      if (Vector3.Distance(transform.position, enemy.position) <= leeway && isFlying)
+      if (Vector3.Distance(transform.position, new Vector3(enemy.position.x,enemy.position.y + yOffset, enemy.position.z)) <= leeway && isFlying)
       {
          HitOponent();
       }

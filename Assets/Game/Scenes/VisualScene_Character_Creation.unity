@@ -9538,7 +9538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outputImage: {fileID: 934188198}
-  textureHolderSo: {fileID: 11400000, guid: cce607b8229572244812726b12f3537c, type: 2}
+  textureHolderSo: {fileID: 11400000, guid: 0e678c72a4fb8e249859fac77114e641, type: 2}
   key: KEY
 --- !u!81 &740743172
 AudioListener:
@@ -11956,6 +11956,34 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 996328155}
+    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CreateCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CharacterCreationManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295328733772924253, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5295328733772924256, guid: c37d49c248fff48a79c295f9a2ed01d4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12974,7 +13002,7 @@ MonoBehaviour:
   character: {fileID: 11400000, guid: 0e678c72a4fb8e249859fac77114e641, type: 2}
   continueButton: {fileID: 705520947}
   createdCharacterUI: {fileID: 517896959}
-  cardSetup: {fileID: 0}
+  serverManager: {fileID: 996328158}
   currentSelectedResourcesSo: {fileID: 11400000, guid: 66500aa83a55161498efe01715c6e5ba, type: 2}
 --- !u!4 &996328156
 Transform:
@@ -21872,7 +21900,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100960, guid: 038320a534bd8b444b43734860d1a211, type: 3}
       propertyPath: m_Name
-      value: ModularCharacters (2)
+      value: CreatedCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 400960, guid: 038320a534bd8b444b43734860d1a211, type: 3}
       propertyPath: m_RootOrder
@@ -25042,7 +25070,7 @@ MonoBehaviour:
   - {r: 0.5294118, g: 0.30980393, b: 0.64705884, a: 0}
   - {r: 0.86666673, g: 0.77647066, b: 0.25490198, a: 0}
   - {r: 0.2392157, g: 0.45882356, b: 0.81568635, a: 0}
-  characterInfoSo: {fileID: 11400000, guid: cce607b8229572244812726b12f3537c, type: 2}
+  characterInfoSo: {fileID: 11400000, guid: 0e678c72a4fb8e249859fac77114e641, type: 2}
   setupCamera: 0
   enabledObjects: []
   male:

@@ -25,6 +25,7 @@ public class CharacterCreationManager : MonoBehaviour
    public Button continueButton;
    public CanvasGroup createdCharacterUI;
 
+   public ServerCommunicationManager serverManager;
    public CurrentSelectedResourcesSO currentSelectedResourcesSo;
    private bool characterIsCreated;
 

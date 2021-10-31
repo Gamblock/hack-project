@@ -31,6 +31,10 @@ public class ServerCommunicationManager : MonoBehaviour
         
     }
 
+    public void SaveCharacterToServerInvoke(CharacterInfoSO characterParams)
+    {
+        StartCoroutine(SaveCharacterToServer(characterParams));
+    }
     public void ShowEmail(string mail)
     {
         PlayerPrefs.SetString(emailkeyKey,mail);
@@ -127,7 +131,6 @@ public class ServerCommunicationManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("foundData");
                 model = JsonUtility.FromJson<Model>(www.downloadHandler.text);
                 JsonUtility.FromJsonOverwrite(model.unityGameModel, characterToOverride);
                 PlayerPrefs.SetString(modelIDKey,model._id);

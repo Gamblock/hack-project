@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DamageNumbersPro;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum BattleStates
 {
@@ -35,6 +36,7 @@ public class BattleSystem : MonoBehaviour
     private PlayerController playerController;
     private EnemyController enemyController;
     private bool isFirstTurn = true;
+    private bool enemyCanAttack;
     
     private void Start()
     {
@@ -111,6 +113,10 @@ public class BattleSystem : MonoBehaviour
         }
         if (state == BattleStates.PlayerTurn)
         {
+            foreach (var button in playerActionsUI.GetComponentsInChildren<Button>())
+            {
+                button.interactable = true;
+            }
             playerActionsUI.interactable = true;
         }
         else
@@ -118,7 +124,7 @@ public class BattleSystem : MonoBehaviour
             playerActionsUI.interactable = false;
         }
 
-        if (state == BattleStates.EnemyTurn)
+        if (state == BattleStates.EnemyTurn && enemyCanAttack)
         {
             EnemyAttack();
         }
@@ -141,30 +147,34 @@ public class BattleSystem : MonoBehaviour
         healingNumbers.CreateNew(20,playerPrefab.transform.position);
         await Task.Delay(TimeSpan.FromSeconds(1));
         state = BattleStates.EnemyTurn;
+        enemyCanAttack = true;
     }
     public async void EnemyAttack()
     {
         enemyController.UseRandomAttack();
-
+        enemyCanAttack = false;
         await Task.Delay(TimeSpan.FromSeconds(2));
-        
     }
 
-    public void DamagePlayer(int damageValue)
+    public async void DamagePlayer(int damageValue)
     {
         playerUnit.currentHp = playerUnit.currentHp - damageValue;
         playerUnit.gameObject.GetComponent<BattleUI>().SetHP(playerUnit.currentHp);
         playerPrefab.GetComponent<PlayerController>().TakeDamage();
         damageNumbers.CreateNew(damageValue, playerPrefab.transform.position);
+        await Task.Delay(TimeSpan.FromSeconds(1));
         state = BattleStates.PlayerTurn;
+        
     } 
-    public void DamageEnemy(int damageValue)
+    public async void DamageEnemy(int damageValue)
     {
         enemyUnit.currentHp = enemyUnit.currentHp - damageValue;
         enemyUnit.gameObject.GetComponent<BattleUI>().SetHP(enemyUnit.currentHp);
         enemy.GetComponent<EnemyController>().TakeDamage();
         damageNumbers.CreateNew(damageValue, enemy.transform.position);
+        await Task.Delay(TimeSpan.FromSeconds(1));
         state = BattleStates.EnemyTurn;
+        enemyCanAttack = true;
     }
     
 }
