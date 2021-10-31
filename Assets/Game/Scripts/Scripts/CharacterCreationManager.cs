@@ -24,7 +24,7 @@ public class CharacterCreationManager : MonoBehaviour
    public CharacterInfoSO character;
    public Button continueButton;
    public CanvasGroup createdCharacterUI;
-
+   
    public ServerCommunicationManager serverManager;
    public CurrentSelectedResourcesSO currentSelectedResourcesSo;
    private bool characterIsCreated;
@@ -50,6 +50,8 @@ public class CharacterCreationManager : MonoBehaviour
 
    public async void CreateCharacter()
    {
+       randomizer.gameObject.SetActive(true);
+       await Task.Delay(TimeSpan.FromSeconds(0.05));
        if (currentSelectedResourcesSo.selectedResourcesList.Count == numberOfSlots)
        {
            statsUI.RandomizeStats(medianStatValue,statRange, currentSelectedResourcesSo.selectedResourcesList, character);

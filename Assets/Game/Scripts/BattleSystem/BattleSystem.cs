@@ -37,6 +37,8 @@ public class BattleSystem : MonoBehaviour
     private EnemyController enemyController;
     private bool isFirstTurn = true;
     private bool enemyCanAttack;
+    private bool tankAbilityUsed;
+    private bool dpsAbilityUsed;
     
     private void Start()
     {
@@ -66,9 +68,9 @@ public class BattleSystem : MonoBehaviour
     {
         enemy =  Instantiate(enemyPrefab, enemyPosition.position,enemyPosition.rotation); 
         playerController = playerPrefab.GetComponent<PlayerController>();
-       enemyController = enemy.GetComponent<EnemyController>();
-       playerController.Init(enemy.transform);
-       enemyController.Init(playerPrefab.transform);
+        enemyController = enemy.GetComponent<EnemyController>();
+        playerController.Init(enemy.transform);
+        enemyController.Init(playerPrefab.transform);
         playerUnit = playerPrefab.GetComponent<BattleUnit>();
         playerUnit.currentHp = playerUnit.hp;
         playerPrefab.GetComponent<BattleUI>().SetHud(playerUnit);
@@ -115,7 +117,11 @@ public class BattleSystem : MonoBehaviour
         {
             foreach (var button in playerActionsUI.GetComponentsInChildren<Button>())
             {
-                button.interactable = true;
+                if (button.gameObject.activeSelf)
+                {
+                    button.interactable = true; 
+                }
+               
             }
             playerActionsUI.interactable = true;
         }
@@ -128,6 +134,21 @@ public class BattleSystem : MonoBehaviour
         {
             EnemyAttack();
         }
+    }
+
+    public void TankAbility()
+    {
+        playerPrefab.GetComponent<PlayerController>().TankAbility();
+        state = BattleStates.EnemyTurn;
+        enemyCanAttack = true;
+        tankAbilityUsed = true;
+    }
+    public void dpsAbility()
+    {
+        playerPrefab.GetComponent<PlayerController>().DPSAbility();
+        state = BattleStates.EnemyTurn;
+        enemyCanAttack = true;
+        dpsAbilityUsed = true;
     }
     public async void PlayerAttack()
     {
@@ -158,6 +179,13 @@ public class BattleSystem : MonoBehaviour
 
     public async void DamagePlayer(int damageValue)
     {
+        if (tankAbilityUsed)
+        {
+            damageValue = damageValue / 2;
+            DamageEnemy(damageValue);
+            tankAbilityUsed = false;
+            state = BattleStates.PlayerTurn;
+        }
         playerUnit.currentHp = playerUnit.currentHp - damageValue;
         playerUnit.gameObject.GetComponent<BattleUI>().SetHP(playerUnit.currentHp);
         playerPrefab.GetComponent<PlayerController>().TakeDamage();
@@ -168,6 +196,11 @@ public class BattleSystem : MonoBehaviour
     } 
     public async void DamageEnemy(int damageValue)
     {
+        if (dpsAbilityUsed)
+        {
+            damageValue = damageValue * 2 + 5;
+            dpsAbilityUsed = false;
+        }
         enemyUnit.currentHp = enemyUnit.currentHp - damageValue;
         enemyUnit.gameObject.GetComponent<BattleUI>().SetHP(enemyUnit.currentHp);
         enemy.GetComponent<EnemyController>().TakeDamage();

@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public Animator playerAnimator;
     public ParticleSystem takeDamageParticles;
     public ParticleSystem healParticles;
+    public ParticleSystem tankAbilityParticles;
+    public ParticleSystem dpsAbilityParticles;
     public IntEventChannelSO onEnemyDamaged;
     public VoidEventChannelSO onPlayerTurnFinished;
     private Transform oponent;
@@ -61,4 +63,16 @@ public class PlayerController : MonoBehaviour
         slashParticles.Play();
         onEnemyDamaged.RaiseEvent(20);
     }
+
+   public void TankAbility()
+   {
+       playerAnimator.SetTrigger("Heal");
+       tankAbilityParticles.Play();
+   }
+   public void DPSAbility()
+   {
+       Debug.Log("dps");
+       playerAnimator.SetTrigger("Heal");
+       dpsAbilityParticles.Play();
+   }
 }
