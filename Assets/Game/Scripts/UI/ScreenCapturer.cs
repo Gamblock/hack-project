@@ -30,7 +30,6 @@ public class ScreenCapturer : MonoBehaviour
         {
             takeScreenShotOnNextFrame = false;
             RenderTexture renderTexture = screenshotCamera.targetTexture;
-
             Texture2D renderResult =
                 new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
             Rect rect = new Rect(0, 0, renderTexture.width, renderTexture.height);
@@ -38,16 +37,12 @@ public class ScreenCapturer : MonoBehaviour
             renderResult.Apply();
             outputImage.texture = renderResult;
             textureHolderSo.cardTexture = renderResult;
-            
-          
             byte[] byteArray = renderResult.EncodeToPNG();
-           StartCoroutine(InitiateModelOnServer(byteArray)) ;
+            StartCoroutine(InitiateModelOnServer(byteArray)) ;
             string base64 = System.Convert.ToBase64String(byteArray);
             PlayerPrefs.SetString(key,base64);
             PlayerPrefs.Save();
             System.IO.File.WriteAllBytes(Application.dataPath + "/CameraScrenShot.png", byteArray);
-            Debug.Log("screenshot");
-            
             RenderTexture.ReleaseTemporary(renderTexture);
             screenshotCamera.targetTexture = null;
         }

@@ -31,11 +31,6 @@ public class ServerCommunicationManager : MonoBehaviour
         ShowEmail("admin@admin.com");
         
     }
-
-    public void SaveCharacterToServerInvoke(CharacterInfoSO characterParams)
-    {
-        StartCoroutine(SaveCharacterToServer(characterParams));
-    }
     public void ShowEmail(string mail)
     {
         PlayerPrefs.SetString(emailkeyKey,mail);
@@ -43,27 +38,7 @@ public class ServerCommunicationManager : MonoBehaviour
 
     }
     
-    public IEnumerator SaveModelToServer(CharacterInfoSO characterInfo, string emailParam)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("model_id", JsonUtility.ToJson(character));
-        form.AddField("email", emailParam);
-        form.AddField("unity_password", password.secretPassword);
-        Debug.Log("https://binance-hack.herokuapp.com/api/updateUser/" + user._id);
-        using (UnityWebRequest www =
-            UnityWebRequest.Post("https://binance-hack.herokuapp.com/api/updateUser/" + user._id, form))
-        {
-            yield return www.SendWebRequest();
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                Debug.Log(www.downloadHandler.text);
-            }
-        }
-    }
+   
     public IEnumerator GetInfo(string emailParam)
     {
         Debug.Log("get");
@@ -86,31 +61,9 @@ public class ServerCommunicationManager : MonoBehaviour
             }
         }
     }
-    public IEnumerator SaveCharacterToServer(CharacterInfoSO characterInfo)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("model_id", JsonUtility.ToJson(character));
-        form.AddField("email", PlayerPrefs.GetString(email));
-        form.AddField("unity_password", password.secretPassword);
-        Debug.Log("https://binance-hack.herokuapp.com/api/updateUser/" + user._id);
-        using (UnityWebRequest www =
-            UnityWebRequest.Post("https://binance-hack.herokuapp.com/api/updateUser/" + user._id, form))
-        {
-            yield return www.SendWebRequest();
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                Debug.Log(www.downloadHandler.text);
-            }
-        }
-    }
-
+    
     public void GetAllDataFromServer(RawImage image,CharacterInfoSO characterInfoSo)
     {
-        Debug.Log("Getting data");
         StartCoroutine(GetModelFromServer(characterInfoSo));
         StartCoroutine(GetTextureFromServer(image));
     }
@@ -164,29 +117,9 @@ public class ServerCommunicationManager : MonoBehaviour
         }
     }
     
-   
-    
-    public IEnumerator GetModelIDFromServerAndMint()
+   public void MintNFT()
     {
-        using (UnityWebRequest www =
-            UnityWebRequest.Get("https://binance-hack.herokuapp.com/api/model/getModelIdByUserId/" + user._id))
-        {
-            yield return www.SendWebRequest();
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                Debug.Log(www.downloadHandler.text);
-                Application.OpenURL("https://binance-hack-frontend.herokuapp.com/tokenMint?modelId=" + www.downloadHandler.text);
-            }
-        }
-    }
-
-    public void MintNFT()
-    {
-        StartCoroutine(GetModelIDFromServerAndMint());
+        Application.OpenURL("https://binance-hack-frontend.herokuapp.com/tokenMint?modelId=" + PlayerPrefs.GetString(modelIDKey));
     }
   
     

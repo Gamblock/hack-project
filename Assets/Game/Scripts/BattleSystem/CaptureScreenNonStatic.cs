@@ -47,7 +47,6 @@ public class CaptureScreenNonStatic : MonoBehaviour
     
     private IEnumerator InitiateNFTOnServer(byte[] bytes)
     {
-        
         WWWForm form = new WWWForm();
         form.AddBinaryData("image",bytes);
         form.AddField("unity_password","ebcb6eb1-c67a-49ad-9550-a573f2b0d55b");
