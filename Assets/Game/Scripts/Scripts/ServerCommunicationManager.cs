@@ -25,12 +25,7 @@ public class ServerCommunicationManager : MonoBehaviour
 
     private Model model;
     private string email;
-
-    private void Awake()
-    {
-        ShowEmail("admin@admin.com");
-        
-    }
+    
     public void ShowEmail(string mail)
     {
         PlayerPrefs.SetString(emailkeyKey,mail);
