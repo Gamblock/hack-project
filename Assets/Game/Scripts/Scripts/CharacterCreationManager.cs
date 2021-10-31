@@ -48,27 +48,22 @@ public class CharacterCreationManager : MonoBehaviour
        }
    }
 
-   public async void CreateCharacter()
+   public void CreateCharacter()
+   {
+       StartCoroutine(CharacterCreation());
+   }
+
+   private IEnumerator CharacterCreation()
    {
        randomizer.gameObject.SetActive(true);
-       await Task.Delay(TimeSpan.FromSeconds(0.05));
-       if (currentSelectedResourcesSo.selectedResourcesList.Count == numberOfSlots)
-       {
-           statsUI.RandomizeStats(medianStatValue,statRange, currentSelectedResourcesSo.selectedResourcesList, character);
-           randomizer.Randomize();
-           nameText.text = nameGenerator.GenerateRandomName(currentSelectedResourcesSo.selectedResourcesList);
-           characterCreationMenu.alpha = 0;
-           characterCreationMenu.interactable = false;
-           createdCharacterUI.alpha = 1;
-           await Task.Delay(TimeSpan.FromSeconds(0.05));
-           ScreenCapturer.TakeScreenShot_Static(400,540);
-       }
-       else
-       {
-           errorTextGroup.alpha = 1;
-           errorTextGroup.GetComponentInChildren<TextMeshProUGUI>().text = "You need to select 3 resource types";
-           await Task.Delay(TimeSpan.FromSeconds(3));
-           errorTextGroup.alpha = 0;
-       }
+       yield return new WaitForSeconds(0.5f);
+       statsUI.RandomizeStats(medianStatValue,statRange, currentSelectedResourcesSo.selectedResourcesList, character);
+       randomizer.Randomize();
+       nameText.text = nameGenerator.GenerateRandomName(currentSelectedResourcesSo.selectedResourcesList);
+       characterCreationMenu.alpha = 0;
+       characterCreationMenu.interactable = false;
+       createdCharacterUI.alpha = 1;
+       yield return new WaitForSeconds(0.05f);
+       ScreenCapturer.TakeScreenShot_Static(400,540);
    }
 }

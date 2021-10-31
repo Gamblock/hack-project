@@ -15,7 +15,6 @@ public class AppController : MonoBehaviour
 
    public void AllowCharacterCreation()
    {
-       Debug.Log("nodatat");
        creatCharacterButton.interactable = true;
    }
    private void OnEnable()

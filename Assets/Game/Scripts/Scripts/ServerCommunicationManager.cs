@@ -11,9 +11,6 @@ using Image = UnityEngine.UIElements.Image;
 
 public class ServerCommunicationManager : MonoBehaviour
 {
-    [HideInInspector] public string userEmail = "admin@admin.com";
-    [HideInInspector] public string userPassword = "admin";
-    [HideInInspector] public const string HOST = "https://binance-hack.herokuapp.com/api/login";
     public VoidEventChannelSO onServerDataNotFound;
         
     public PasswordContainerSO password;
@@ -30,7 +27,6 @@ public class ServerCommunicationManager : MonoBehaviour
     {
         PlayerPrefs.SetString(emailkeyKey,mail);
         StartCoroutine(GetInfo(mail));
-
     }
     
    
