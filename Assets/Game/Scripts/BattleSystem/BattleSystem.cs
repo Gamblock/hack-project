@@ -29,7 +29,8 @@ public class BattleSystem : MonoBehaviour
     public DamageNumber damageNumbers;
     public DamageNumber healingNumbers;
     public CanvasGroup playerActionsUI;
-
+    public TokenController gloryHole;
+    
     private BattleUnit playerUnit;
     private BattleUnit enemyUnit;
     private GameObject enemy;
@@ -87,6 +88,7 @@ public class BattleSystem : MonoBehaviour
             state = BattleStates.Won;
             winscreenCanvas.interactable = true;
             winscreenCanvas.alpha = 1;
+            gloryHole.UpdateTokenAmount(100);
         }
         else if(playerUnit.currentHp <= 0)
         {

@@ -64,9 +64,8 @@ public class SetCharacterFromSO : MonoBehaviour
 
    private IEnumerator SettingCharacter()
    {
-      yield return new WaitForSeconds(0.5f);
       serverManager.GetCharacterFromServer(characterInfoSo);
-      Debug.Log(characterInfoSo.objectIndexes.Count);
+      yield return new WaitForSeconds(0.5f);
       battleUI.SetUIButtons(characterInfoSo);
       foreach (var index in characterInfoSo.objectIndexes)
       {

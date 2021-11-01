@@ -7,10 +7,12 @@ using System.Runtime.InteropServices;
 
 public class TestLibrary : MonoBehaviour
 {
-    public ScreenCapturer capt;
+   public ServerCommunicationManager serverManager;
 
-    public void Capture()
-    {
-        
-    }
+   private void Start()
+   {
+      serverManager.GetUserByEmail("admin@admin.com");
+      serverManager.SetTokenAmountOnServer(100);
+      Debug.Log(PlayerPrefs.GetInt("CASHMONEY"));
+   }
 }

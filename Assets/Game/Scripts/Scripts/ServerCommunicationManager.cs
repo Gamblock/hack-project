@@ -16,22 +16,31 @@ public class ServerCommunicationManager : MonoBehaviour
     public PasswordContainerSO password;
     public CharacterInfoSO character;
     public User user = new User();
-    private string emailkeyKey = "EMAIL";
-    private string userIDKey = "USERID";
-    private string modelIDKey = "MODELID";
+    public const string emailkeyKey = "EMAIL";
+    public  const string userIDKey = "USERID";
+    public const string modelIDKey = "MODELID";
+    public const string tokenKey = "CASHMONEY";
 
     private Model model;
     private string email;
-    
 
+    
+    public string GetEmailKey()
+    {
+        return emailkeyKey;
+    }
+    public string GetTokenKey()
+    {
+        return tokenKey;
+    }
     public void ShowEmail(string mail)
     {
         PlayerPrefs.SetString(emailkeyKey,mail);
-        StartCoroutine(GetInfo(mail));
+        StartCoroutine(GetUserByEmail(mail));
     }
     
    
-    public IEnumerator GetInfo(string emailParam)
+    public IEnumerator GetUserByEmail(string emailParam)
     {
         Debug.Log("get");
         WWWForm form = new WWWForm();
@@ -50,10 +59,35 @@ public class ServerCommunicationManager : MonoBehaviour
                 Debug.Log(www.downloadHandler.text);
                 user = JsonUtility.FromJson<User>(www.downloadHandler.text);
                 PlayerPrefs.SetString(userIDKey,user._id);
+                PlayerPrefs.SetInt(tokenKey,user.tokenAmount);
             }
         }
     }
-    
+
+    public void SetTokenAmountOnServer(int tokenAmount)
+    {
+        StartCoroutine(SetUserTokenAmount(tokenAmount));
+    }
+    private IEnumerator SetUserTokenAmount(int tokenAmount)
+    {
+       
+        WWWForm form = new WWWForm();
+       form.AddField("tokenAmount", tokenAmount);
+        using (UnityWebRequest www =
+            UnityWebRequest.Post("https://binance-hack.herokuapp.com/api/user/updateUserTokenAmount/" + PlayerPrefs.GetString(userIDKey), form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+               Debug.Log(www.error); 
+            }
+            else
+            {
+                Debug.Log(www.downloadHandler.text);  
+            }
+        }
+    }
     public void GetAllDataFromServer(RawImage image,CharacterInfoSO characterInfoSo)
     {
         StartCoroutine(GetModelFromServer(characterInfoSo));
@@ -79,12 +113,11 @@ public class ServerCommunicationManager : MonoBehaviour
             {
                 model = JsonUtility.FromJson<Model>(www.downloadHandler.text);
                 JsonUtility.FromJsonOverwrite(model.unityGameModel, characterToOverride);
+               Debug.Log(www.downloadHandler.text);
                 PlayerPrefs.SetString(modelIDKey,model._id);
             }
             
         }
-        
-        
     }
     IEnumerator GetTextureFromServer(RawImage image)
     {
@@ -118,7 +151,7 @@ public class ServerCommunicationManager : MonoBehaviour
     public class User
     {
         public string _id;
-        
+        public int tokenAmount;
         public string firstname;
         public string lastname;
         public string username;
