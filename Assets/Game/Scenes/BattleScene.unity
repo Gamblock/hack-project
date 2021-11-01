@@ -1390,7 +1390,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 950616845}
         m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
-        m_MethodName: PlayerAttack
+        m_MethodName: PlayerAttackMelee
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

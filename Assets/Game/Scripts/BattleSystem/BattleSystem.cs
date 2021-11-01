@@ -40,6 +40,7 @@ public class BattleSystem : MonoBehaviour
     private bool enemyCanAttack;
     private bool tankAbilityUsed;
     private bool dpsAbilityUsed;
+    private bool playerUsedAbility;
     
     private void Start()
     {
@@ -94,21 +95,14 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleStates.Lost;
         }
-        if (state == BattleStates.PlayerTurn)
+        if (state == BattleStates.PlayerTurn && !playerUsedAbility)
         {
-            foreach (var button in playerActionsUI.GetComponentsInChildren<Button>())
-            {
-                if (button.gameObject.activeSelf)
-                {
-                    button.interactable = true; 
-                }
-               
-            }
             playerActionsUI.interactable = true;
         }
-        else
+        else if(state != BattleStates.PlayerTurn)
         {
             playerActionsUI.interactable = false;
+            playerUsedAbility = false;
         }
 
         if (state == BattleStates.EnemyTurn && enemyCanAttack)
@@ -117,8 +111,14 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    public void DisablePlayerActionsUi()
+    {
+        playerActionsUI.interactable = false;
+        Debug.Log("disabled");
+    }
     public void TankAbility()
     {
+        playerUsedAbility = true;
         playerPrefab.GetComponent<PlayerController>().TankAbility();
         state = BattleStates.EnemyTurn;
         enemyCanAttack = true;
@@ -126,13 +126,16 @@ public class BattleSystem : MonoBehaviour
     }
     public void dpsAbility()
     {
+        playerUsedAbility = true;
         playerPrefab.GetComponent<PlayerController>().DPSAbility();
         state = BattleStates.EnemyTurn;
         enemyCanAttack = true;
         dpsAbilityUsed = true;
     }
-    public void PlayerAttack()
+    public void PlayerAttackMelee()
     {
+        playerUsedAbility = true;
+        playerActionsUI.interactable = false;
         StartCoroutine(PlayerAttackDelay());
     }
 
@@ -143,6 +146,8 @@ public class BattleSystem : MonoBehaviour
     }
     public void PlayerHealAttack()
     {
+        playerUsedAbility = true;
+        playerActionsUI.interactable = false;
         playerPrefab.GetComponent<PlayerController>().HealerAttackStart();
     }
     public  void PlayerHeal()
@@ -162,6 +167,7 @@ public class BattleSystem : MonoBehaviour
     }
     public void EnemyAttack()
     {
+        
         StartCoroutine(EnemyAttackDelay());
     }
 

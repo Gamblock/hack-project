@@ -13174,6 +13174,7 @@ MonoBehaviour:
   onServerDataNotFound: {fileID: 11400000, guid: efc97161495a1af4c999eb3e87bcef6a, type: 2}
   password: {fileID: 11400000, guid: 586f2a05cfd0d6143909faf1f90571ff, type: 2}
   character: {fileID: 11400000, guid: 0e678c72a4fb8e249859fac77114e641, type: 2}
+  tokenController: {fileID: 0}
 --- !u!1001 &1006038664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13816,6 +13817,7 @@ GameObject:
   - component: {fileID: 1056652646}
   - component: {fileID: 1056652645}
   - component: {fileID: 1056652644}
+  - component: {fileID: 1056652648}
   m_Layer: 5
   m_Name: GLORY COUNTER
   m_TagString: Untagged
@@ -13904,6 +13906,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1056652648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056652643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5477e81b4891d2419cafa3333e6dab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tokenText: {fileID: 314024268}
+  serverManager: {fileID: 996328158}
 --- !u!1001 &1072408124
 PrefabInstance:
   m_ObjectHideFlags: 0

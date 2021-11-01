@@ -20,11 +20,12 @@ public class ServerCommunicationManager : MonoBehaviour
     public  const string userIDKey = "USERID";
     public const string modelIDKey = "MODELID";
     public const string tokenKey = "CASHMONEY";
+    public TokenController tokenController;
 
     private Model model;
     private string email;
 
-    
+
     public string GetEmailKey()
     {
         return emailkeyKey;
@@ -37,6 +38,7 @@ public class ServerCommunicationManager : MonoBehaviour
     {
         PlayerPrefs.SetString(emailkeyKey,mail);
         StartCoroutine(GetUserByEmail(mail));
+        tokenController.UpdateTokenAmount(0);
     }
     
    
