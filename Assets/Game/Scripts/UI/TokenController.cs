@@ -22,4 +22,9 @@ public class TokenController : MonoBehaviour
     {
         Application.OpenURL("https://binance-hack-frontend.herokuapp.com/tokenBalance");
     }
+
+    public void SeeAllNFT()
+    {
+        Application.OpenURL("https://binance-hack-frontend.herokuapp.com/nftList");
+    }
 }
