@@ -56,14 +56,18 @@ public class PlayerController : MonoBehaviour
         Debug.Log("healer");
         playerAnimator.SetTrigger("HealerAttack");
     }
-   public async void AttackMelee()
-    {
-        playerAnimator.SetTrigger("Attack");
-        await Task.Delay(TimeSpan.FromSeconds(0.5));
-        slashParticles.Play();
-        onEnemyDamaged.RaiseEvent(20);
-    }
+   public  void AttackMelee()
+   {
+       StartCoroutine(AttackMeleeDelay());
+   }
 
+   private IEnumerator AttackMeleeDelay()
+   {
+       playerAnimator.SetTrigger("Attack");
+       yield return new WaitForSeconds(0.5f);
+       slashParticles.Play();
+       onEnemyDamaged.RaiseEvent(20); 
+   }
    public void TankAbility()
    {
        playerAnimator.SetTrigger("Heal");

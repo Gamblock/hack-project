@@ -61,10 +61,10 @@ public class SetCharacterFromSO : MonoBehaviour
          
       }
    }
-   
-   public async void SetCharacter()
+
+   private IEnumerator SettingCharacter()
    {
-      await Task.Delay(TimeSpan.FromSeconds(0.5));
+      yield return new WaitForSeconds(0.5f);
       serverManager.GetCharacterFromServer(characterInfoSo);
       Debug.Log(characterInfoSo.objectIndexes.Count);
       battleUI.SetUIButtons(characterInfoSo);
@@ -78,4 +78,11 @@ public class SetCharacterFromSO : MonoBehaviour
          
       }
    }
+   public void SetCharacter()
+   {
+      StartCoroutine(SettingCharacter());
+   }
+
 }
+
+

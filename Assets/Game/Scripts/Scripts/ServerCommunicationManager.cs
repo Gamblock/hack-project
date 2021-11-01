@@ -23,6 +23,7 @@ public class ServerCommunicationManager : MonoBehaviour
     private Model model;
     private string email;
     
+
     public void ShowEmail(string mail)
     {
         PlayerPrefs.SetString(emailkeyKey,mail);

@@ -17,10 +17,17 @@ public class ScreenShoter : MonoBehaviour
        CaptureScreenWithDelay();
     }
 
-    private async void CaptureScreenWithDelay()
+    private  void CaptureScreenWithDelay()
     {
-        await Task.Delay(TimeSpan.FromSeconds(1));
+
+        StartCoroutine(ScreenCaptureDelay());
+    }
+
+    private IEnumerator ScreenCaptureDelay()
+    {
+        yield return new WaitForSeconds(1);
         capturer.TakeScreenShot((int)widthHeight.x,(int)widthHeight.y);
+        
     }
     public void CaptureSpecificRect()
     {

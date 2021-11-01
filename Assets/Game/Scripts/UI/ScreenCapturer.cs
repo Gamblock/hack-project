@@ -28,7 +28,6 @@ public class ScreenCapturer : MonoBehaviour
     {
         if (takeScreenShotOnNextFrame)
         {
-            Debug.Log("ScreenshotStart");
             takeScreenShotOnNextFrame = false;
             RenderTexture renderTexture = screenshotCamera.targetTexture;
             Texture2D renderResult =
@@ -39,12 +38,7 @@ public class ScreenCapturer : MonoBehaviour
             outputImage.texture = renderResult;
             textureHolderSo.cardTexture = renderResult;
             byte[] byteArray = renderResult.EncodeToPNG();
-            Debug.Log("ScreenshotTaken");
             StartCoroutine(InitiateModelOnServer(byteArray)) ;
-            string base64 = System.Convert.ToBase64String(byteArray);
-            PlayerPrefs.SetString(key,base64);
-            PlayerPrefs.Save();
-            System.IO.File.WriteAllBytes(Application.dataPath + "/CameraScrenShot.png", byteArray);
             RenderTexture.ReleaseTemporary(renderTexture);
             screenshotCamera.targetTexture = null;
         }
@@ -52,7 +46,7 @@ public class ScreenCapturer : MonoBehaviour
     
     private IEnumerator InitiateModelOnServer(byte[] bytes)
     {
-        Debug.Log("ModelSavingStarted");
+        Debug.Log("https://binance-hack.herokuapp.com/api/model/create/" + PlayerPrefs.GetString(userID));
         WWWForm form = new WWWForm();
         form.AddBinaryData("image",bytes);
         form.AddField("unity_password","ebcb6eb1-c67a-49ad-9550-a573f2b0d55b");

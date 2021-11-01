@@ -96,7 +96,7 @@ public class StatsUI : MonoBehaviour
          }
       }
 
-      Debug.Log(statsTouse[index].statToUse);
+    
    
       if (statsTouse[index].statToUse == TypeEnums.StatTypes.armor)
       {

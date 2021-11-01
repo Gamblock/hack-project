@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
    {
        enemyAnimator.SetTrigger("Spike");
    }
-   public async void Spike()
+   public void Spike()
    {
        GameObject spikeGO = Instantiate(spike.gameObject, new Vector3(oponent.position.x, oponent.position.y + spikeYOffset, oponent.position.z), Quaternion.identity);
        onPlayerDamaged.RaiseEvent(spikeDamage);

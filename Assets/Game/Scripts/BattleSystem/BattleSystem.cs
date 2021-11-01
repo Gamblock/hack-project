@@ -78,29 +78,8 @@ public class BattleSystem : MonoBehaviour
         enemyUnit.currentHp = enemyUnit.hp;
         enemy.GetComponent<BattleUI>().SetHud(enemyUnit);
         state = BattleStates.PlayerTurn;
-        PlayerTurn();
     }
-
-    public void PlayerTurn()
-    {
-        if (isFirstTurn)
-        {
-            isFirstTurn = false;
-            ShowTutorialWindow("It's your turn choose an action", 5);
-        }
-        
-    }
-
-    public async void ShowTutorialWindow(string inputText,float showDuration)
-    {
-        /*
-        tutorialCanvas.GetComponentInChildren<TextMeshProUGUI>().text = inputText;
-        tutorialCanvas.alpha = 1;
-        await Task.Delay(TimeSpan.FromSeconds(showDuration));
-        tutorialCanvas.alpha = 0;
-        */
-    }
-
+    
     private void StateChecker()
     {
         if (enemyUnit.currentHp <= 0)
@@ -150,34 +129,52 @@ public class BattleSystem : MonoBehaviour
         enemyCanAttack = true;
         dpsAbilityUsed = true;
     }
-    public async void PlayerAttack()
+    public void PlayerAttack()
     {
-        playerPrefab.GetComponent<PlayerController>().AttackMelee();
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        StartCoroutine(PlayerAttackDelay());
     }
 
+    private IEnumerator PlayerAttackDelay()
+    {
+        playerPrefab.GetComponent<PlayerController>().AttackMelee();
+        yield return new WaitForSeconds(2);
+    }
     public void PlayerHealAttack()
     {
         playerPrefab.GetComponent<PlayerController>().HealerAttackStart();
     }
-    public async void PlayerHeal()
+    public  void PlayerHeal()
+    {
+        StartCoroutine(PlayerHealDelay());
+    }
+
+    private IEnumerator PlayerHealDelay()
     {
         playerPrefab.GetComponent<PlayerController>().HealerAbility();
         playerUnit.currentHp += 20;
         playerUnit.gameObject.GetComponent<BattleUI>().SetHP(playerUnit.currentHp);
         healingNumbers.CreateNew(20,playerPrefab.transform.position);
-        await Task.Delay(TimeSpan.FromSeconds(1));
+        yield return new WaitForSeconds(1);
         state = BattleStates.EnemyTurn;
-        enemyCanAttack = true;
+        enemyCanAttack = true; 
     }
-    public async void EnemyAttack()
+    public void EnemyAttack()
+    {
+        StartCoroutine(EnemyAttackDelay());
+    }
+
+    private IEnumerator EnemyAttackDelay()
     {
         enemyController.UseRandomAttack();
         enemyCanAttack = false;
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        yield return new WaitForSeconds(2);
     }
+    public  void DamagePlayer(int damageValue)
+    {
+        StartCoroutine(DamagePlayerDelay(damageValue));
 
-    public async void DamagePlayer(int damageValue)
+    } 
+    private IEnumerator  DamagePlayerDelay(int damageValue)
     {
         if (tankAbilityUsed)
         {
@@ -190,11 +187,15 @@ public class BattleSystem : MonoBehaviour
         playerUnit.gameObject.GetComponent<BattleUI>().SetHP(playerUnit.currentHp);
         playerPrefab.GetComponent<PlayerController>().TakeDamage();
         damageNumbers.CreateNew(damageValue, playerPrefab.transform.position);
-        await Task.Delay(TimeSpan.FromSeconds(1));
+        yield return new WaitForSeconds(1);
         state = BattleStates.PlayerTurn;
-        
-    } 
-    public async void DamageEnemy(int damageValue)
+    }
+    public  void DamageEnemy(int damageValue)
+    {
+        StartCoroutine(DamageEnemyDelay(damageValue));
+    }
+
+    private IEnumerator DamageEnemyDelay(int damageValue)
     {
         if (dpsAbilityUsed)
         {
@@ -205,9 +206,9 @@ public class BattleSystem : MonoBehaviour
         enemyUnit.gameObject.GetComponent<BattleUI>().SetHP(enemyUnit.currentHp);
         enemy.GetComponent<EnemyController>().TakeDamage();
         damageNumbers.CreateNew(damageValue, enemy.transform.position);
-        await Task.Delay(TimeSpan.FromSeconds(1));
+        yield return new WaitForSeconds(1);
         state = BattleStates.EnemyTurn;
-        enemyCanAttack = true;
+        enemyCanAttack = true;  
     }
     
 }
