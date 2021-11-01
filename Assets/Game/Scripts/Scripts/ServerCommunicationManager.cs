@@ -24,8 +24,7 @@ public class ServerCommunicationManager : MonoBehaviour
 
     private Model model;
     private string email;
-
-
+    
     public string GetEmailKey()
     {
         return emailkeyKey;

@@ -17,4 +17,9 @@ public class TokenController : MonoBehaviour
         tokenText.text = finalValue.ToString();
         serverManager.SetTokenAmountOnServer(finalValue);
     }
+    
+    public void ExchangeTokens()
+    {
+        Application.OpenURL("https://binance-hack-frontend.herokuapp.com/tokenBalance");
+    }
 }
