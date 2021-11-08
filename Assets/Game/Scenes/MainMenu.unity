@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterInfoSo: {fileID: 11400000, guid: 0e678c72a4fb8e249859fac77114e641, type: 2}
-  cardSetter: {fileID: 0}
+  cardsSetter: {fileID: 0}
   creatCharacterButton: {fileID: 0}
   onServerDataNotFound: {fileID: 11400000, guid: efc97161495a1af4c999eb3e87bcef6a, type: 2}
 --- !u!4 &452483803
@@ -319,6 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tokenText: {fileID: 1291814001284476899}
   serverManager: {fileID: 452483805}
+  shopViewModel: {fileID: 11400000, guid: bdf96cc40907a6548908a1817d16d155, type: 2}
 --- !u!114 &452483805
 MonoBehaviour:
   m_ObjectHideFlags: 0

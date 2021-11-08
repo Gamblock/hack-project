@@ -30,12 +30,7 @@ public class SetCharacterFromSO : MonoBehaviour
          }
       }
    }
-
-   private void Start()
-   {
-   }
-
-
+   
    public void SaveActiveParts(CharacterInfoSO charInfoSO)
    {   
       charInfoSO.objectIndexes.Clear();

@@ -17,5 +17,6 @@ public class ProjectileAbility : AbilityBase
         castedProjectile = Instantiate(projectile, GetAllVariables.castingHandTransform.position, Quaternion.identity);
         castedProjectile.onFireballHit = changedValueChannel;
         castedProjectile.Shoot(GetAllVariables.targetTransform,damageValue, GetAllVariables.targetTransform.GetComponent<BattleUnit>().takeDamageChannel);
+        
     }
 }
