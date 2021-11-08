@@ -15,6 +15,7 @@ public class TokenController : MonoBehaviour
         int finalValue = PlayerPrefs.GetInt(serverManager.GetTokenKey());
         finalValue = finalValue + amountToadd;
         tokenText.text = finalValue.ToString();
+        Debug.Log(finalValue);
         serverManager.SetTokenAmountOnServer(finalValue);
     }
     

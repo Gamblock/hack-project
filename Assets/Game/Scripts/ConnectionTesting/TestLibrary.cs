@@ -12,7 +12,7 @@ public class TestLibrary : MonoBehaviour
    private void Start()
    {
       serverManager.GetUserByEmail("admin@admin.com");
-      serverManager.SetTokenAmountOnServer(100);
+     // serverManager.SetTokenAmountOnServer(100);
       Debug.Log(PlayerPrefs.GetInt("CASHMONEY"));
    }
 }

@@ -24,7 +24,12 @@ public class ServerCommunicationManager : MonoBehaviour
 
     private Model model;
     private string email;
-    
+
+    private void Awake()
+    {
+        ShowEmail("admin@admin.com");
+    }
+
     public string GetEmailKey()
     {
         return emailkeyKey;
@@ -37,17 +42,16 @@ public class ServerCommunicationManager : MonoBehaviour
     {
         PlayerPrefs.SetString(emailkeyKey,mail);
         StartCoroutine(GetUserByEmail(mail));
-        tokenController.UpdateTokenAmount(0);
+        tokenController.UpdateTokenAmount(300);
     }
     
    
     public IEnumerator GetUserByEmail(string emailParam)
     {
-        Debug.Log("get");
         WWWForm form = new WWWForm();
        
         using (UnityWebRequest www =
-            UnityWebRequest.Get("https://binance-hack.herokuapp.com/api/user/getUserByEmail/" + emailParam))
+            UnityWebRequest.Get("https://infinite-heroes-backend.herokuapp.com/api/user/getUserByEmail/" + emailParam))
         {
             yield return www.SendWebRequest();
 
@@ -64,6 +68,28 @@ public class ServerCommunicationManager : MonoBehaviour
             }
         }
     }
+    public IEnumerator GetResourcesByUserID(ResourceContainerSO container)
+    {
+        WWWForm form = new WWWForm();
+       
+        using (UnityWebRequest www =
+            UnityWebRequest.Get("https://infinite-heroes-backend.herokuapp.com/api/user/getUserById/" + PlayerPrefs.GetString(userIDKey)))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error); 
+            }
+            else
+            {
+                user = JsonUtility.FromJson<User>(www.downloadHandler.text);
+                container.earthResourceAmount = user.earthResource;
+                container.fireResourceAmount = user.fireResource;
+                container.waterResourceAmount = user.waterResource;
+            }
+        }
+    }
 
     public void SetTokenAmountOnServer(int tokenAmount)
     {
@@ -75,7 +101,7 @@ public class ServerCommunicationManager : MonoBehaviour
         WWWForm form = new WWWForm();
        form.AddField("tokenAmount", tokenAmount);
         using (UnityWebRequest www =
-            UnityWebRequest.Post("https://binance-hack.herokuapp.com/api/user/updateUserTokenAmount/" + PlayerPrefs.GetString(userIDKey), form))
+            UnityWebRequest.Post("https://infinite-heroes-backend.herokuapp.com/api/user/updateUserTokenAmount/" + PlayerPrefs.GetString(userIDKey), form))
         {
             yield return www.SendWebRequest();
 
@@ -103,7 +129,7 @@ public class ServerCommunicationManager : MonoBehaviour
        
         string ID = "";
         using (UnityWebRequest www =
-            UnityWebRequest.Get("https://binance-hack.herokuapp.com/api/model/getModelByUserId/" + PlayerPrefs.GetString(userIDKey)))
+            UnityWebRequest.Get("https://infinite-heroes-backend.herokuapp.com/api/model/getModelByUserId/" + PlayerPrefs.GetString(userIDKey)))
         {
             yield return www.SendWebRequest();
             if (www.result != UnityWebRequest.Result.Success)
@@ -125,7 +151,7 @@ public class ServerCommunicationManager : MonoBehaviour
        
         string ID = "";
         using (UnityWebRequest www =
-            UnityWebRequest.Get("https://binance-hack.herokuapp.com/api/model/getModelByUserId/" + PlayerPrefs.GetString(userIDKey)))
+            UnityWebRequest.Get("https://infinite-heroes-backend.herokuapp.com/api/model/getModelByUserId/" + PlayerPrefs.GetString(userIDKey)))
         {
             yield return www.SendWebRequest();
             if (www.result != UnityWebRequest.Result.Success)
@@ -142,7 +168,56 @@ public class ServerCommunicationManager : MonoBehaviour
             }
         }
     }
-    
+
+    public void UpdateResources(TypeEnums.ResourceTypes resourceToUpdate,int resourceAmount)
+    {
+        StartCoroutine(UpdateUserResources(resourceToUpdate, resourceAmount));
+    }
+    private IEnumerator UpdateUserResources(TypeEnums.ResourceTypes resourceToUpdate,int resourceAmount)
+    {
+       
+        WWWForm form = new WWWForm();
+
+        if (resourceToUpdate == TypeEnums.ResourceTypes.water)
+        {
+            form.AddField("waterResource", resourceAmount);  
+        }
+        else
+        {
+            form.AddField("waterResource", 0);
+        }  
+        if (resourceToUpdate == TypeEnums.ResourceTypes.earth)
+        {
+            form.AddField("earthResource", resourceAmount);  
+        }
+        else
+        {
+            form.AddField("earthResource", 0);
+        } 
+        if (resourceToUpdate == TypeEnums.ResourceTypes.fire)
+        {
+            form.AddField("fireResource", resourceAmount);  
+        }
+        else
+        {
+            form.AddField("fireResource", 0);
+        }
+        form.AddField("unity_password", password.secretPassword);
+        using (UnityWebRequest www =
+            UnityWebRequest.Post("https://infinite-heroes-backend.herokuapp.com/api/user/updateUserResources/" + PlayerPrefs.GetString(userIDKey), form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error); 
+            }
+            else
+            {
+                Debug.Log(www.downloadHandler.text);  
+            }
+        }
+    }
    public void MintNFT()
     {
         Application.OpenURL("https://binance-hack-frontend.herokuapp.com/tokenMint?modelId=" + PlayerPrefs.GetString(modelIDKey));
@@ -163,6 +238,9 @@ public class ServerCommunicationManager : MonoBehaviour
         public string created_at;
         public string updatedAt;
         public string walletAddress;
+        public int waterResource;
+        public int earthResource;
+        public int fireResource;
     } 
     public class Model
     {
@@ -177,5 +255,7 @@ public class ServerCommunicationManager : MonoBehaviour
         public string updatedAt;
         public string createdAt;
         public string user;
+       
+
     }
 }
