@@ -17,7 +17,6 @@ public enum BattleStates
 }
 public class BattleSystem : MonoBehaviour
 {
-    public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
     public Transform playerPosition;
@@ -26,6 +25,7 @@ public class BattleSystem : MonoBehaviour
     public CanvasGroup winscreenCanvas;
     public IntEventChannelSO onPlayerTakeDamage;
     public IntEventChannelSO onEnemyTakeDamage;
+    public IntEventChannelSO onPlayerHeal;
     public DamageNumber damageNumbers;
     public DamageNumber healingNumbers;
     public CanvasGroup playerActionsUI;
@@ -45,7 +45,6 @@ public class BattleSystem : MonoBehaviour
     private void Start()
     {
         state = BattleStates.Start;
-        SetUpBattle();
     }
 
     private void Update()
@@ -57,6 +56,7 @@ public class BattleSystem : MonoBehaviour
     {
         onPlayerTakeDamage.OnEventRaised += DamagePlayer;
         onEnemyTakeDamage.OnEventRaised += DamageEnemy;
+        onPlayerHeal.OnEventRaised += OnPlayerHeal;
     }
 
     private void OnDisable()
@@ -66,16 +66,18 @@ public class BattleSystem : MonoBehaviour
         
     }
 
+    public void InitPlayer(PlayerController player)
+    {
+        playerController = player;
+    }
     public void SetUpBattle()
     {
-        enemy =  Instantiate(enemyPrefab, enemyPosition.position,enemyPosition.rotation); 
-        playerController = playerPrefab.GetComponent<PlayerController>();
+        enemy =  Instantiate(enemyPrefab, enemyPosition.position,enemyPosition.rotation);
         enemyController = enemy.GetComponent<EnemyController>();
         playerController.Init(enemy.transform);
-        enemyController.Init(playerPrefab.transform);
-        playerUnit = playerPrefab.GetComponent<BattleUnit>();
+        enemyController.Init(playerController.transform);
+        playerUnit = playerController.unit;
         playerUnit.currentHp = playerUnit.hp;
-        playerPrefab.GetComponent<BattleUI>().SetHud(playerUnit);
         enemyUnit = enemy.GetComponent<BattleUnit>();
         enemyUnit.currentHp = enemyUnit.hp;
         enemy.GetComponent<BattleUI>().SetHud(enemyUnit);
@@ -114,12 +116,11 @@ public class BattleSystem : MonoBehaviour
     public void DisablePlayerActionsUi()
     {
         playerActionsUI.interactable = false;
-        Debug.Log("disabled");
     }
     public void TankAbility()
     {
         playerUsedAbility = true;
-        playerPrefab.GetComponent<PlayerController>().TankAbility();
+       playerController.TankAbility();
         state = BattleStates.EnemyTurn;
         enemyCanAttack = true;
         tankAbilityUsed = true;
@@ -127,10 +128,15 @@ public class BattleSystem : MonoBehaviour
     public void dpsAbility()
     {
         playerUsedAbility = true;
-        playerPrefab.GetComponent<PlayerController>().DPSAbility();
+        playerController.DPSAbility();
         state = BattleStates.EnemyTurn;
         enemyCanAttack = true;
         dpsAbilityUsed = true;
+    }
+
+    public void CastPlayerSpecialAbility()
+    {
+        playerController.HealerAbility();
     }
     public void PlayerAttackMelee()
     {
@@ -141,30 +147,23 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator PlayerAttackDelay()
     {
-        playerPrefab.GetComponent<PlayerController>().AttackMelee();
+        playerController.GetComponent<PlayerController>().AttackMelee();
         yield return new WaitForSeconds(2);
     }
     public void PlayerHealAttack()
     {
         playerUsedAbility = true;
         playerActionsUI.interactable = false;
-        playerPrefab.GetComponent<PlayerController>().HealerAttackStart();
+        playerController.HealerAttack();
     }
-    public  void PlayerHeal()
+    public void OnPlayerHeal(int healValue)
     {
-        StartCoroutine(PlayerHealDelay());
-    }
-
-    private IEnumerator PlayerHealDelay()
-    {
-        playerPrefab.GetComponent<PlayerController>().HealerAbility();
-        playerUnit.currentHp += 20;
-        playerUnit.gameObject.GetComponent<BattleUI>().SetHP(playerUnit.currentHp);
-        healingNumbers.CreateNew(20,playerPrefab.transform.position);
-        yield return new WaitForSeconds(1);
+        playerUnit.currentHp += healValue;
+        healingNumbers.CreateNew(healValue,playerController.transform.position);
         state = BattleStates.EnemyTurn;
         enemyCanAttack = true; 
     }
+   
     public void EnemyAttack()
     {
         
@@ -193,8 +192,8 @@ public class BattleSystem : MonoBehaviour
         }
         playerUnit.currentHp = playerUnit.currentHp - damageValue;
         playerUnit.gameObject.GetComponent<BattleUI>().SetHP(playerUnit.currentHp);
-        playerPrefab.GetComponent<PlayerController>().TakeDamage();
-        damageNumbers.CreateNew(damageValue, playerPrefab.transform.position);
+        playerController.TakeDamage();
+        damageNumbers.CreateNew(damageValue, playerController.transform.position);
         yield return new WaitForSeconds(1);
         state = BattleStates.PlayerTurn;
     }

@@ -8,7 +8,7 @@ public class SetCharacterFromSO : MonoBehaviour
 {
    public CharacterInfoSO characterInfoSo;
    public ServerCommunicationManager serverManager;
-   public BattleSystemUISetup battleUI;
+  
    
    private List<GameObject> allParts = new List<GameObject>();
    private List<GameObject> activePartsToSave = new List<GameObject>();
@@ -33,7 +33,6 @@ public class SetCharacterFromSO : MonoBehaviour
 
    private void Start()
    {
-      SetCharacter();
    }
 
 
@@ -66,7 +65,6 @@ public class SetCharacterFromSO : MonoBehaviour
    {
       serverManager.GetCharacterFromServer(characterInfoSo);
       yield return new WaitForSeconds(0.5f);
-      battleUI.SetUIButtons(characterInfoSo);
       foreach (var index in characterInfoSo.objectIndexes)
       {
         
@@ -77,9 +75,10 @@ public class SetCharacterFromSO : MonoBehaviour
          
       }
    }
-   public void SetCharacter()
+   public CharacterInfoSO SetCharacter()
    {
       StartCoroutine(SettingCharacter());
+      return characterInfoSo;
    }
 
 }

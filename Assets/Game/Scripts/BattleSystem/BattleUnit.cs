@@ -11,4 +11,5 @@ public class BattleUnit : MonoBehaviour
    public int currentHp;
    public int armor;
    public int strength;
+   public IntEventChannelSO takeDamageChannel;
 }
