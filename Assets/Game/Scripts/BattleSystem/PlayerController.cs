@@ -10,22 +10,34 @@ using Vector3 = UnityEngine.Vector3;
 public class PlayerController : MonoBehaviour
 {
     public Transform castingHandTransform;
-    public Fireball fireball;
     public ParticleSystem slashParticles;
     public Animator playerAnimator;
     public ParticleSystem takeDamageParticles;
-    public ParticleSystem healParticles;
     public ParticleSystem tankAbilityParticles;
     public ParticleSystem dpsAbilityParticles;
     public IntEventChannelSO onEnemyDamaged;
-    public VoidEventChannelSO onPlayerTurnFinished;
+    public SetCharacterFromSO setter;
+    public BattleUI battleUI;
+    public BattleUnit unit;
+    
     private Transform oponent;
     private TypeEnums.ClassTypes classType;
-    private Fireball _fireball;
+    private Projectile _projectile;
 
-    private void Update()
+    public AbilityBase specialAbilityPrefab;
+    public AbilityBase casterAttackPrefab;
+
+    
+    private AbilityBase specialAbility;
+    private AbilityBase casterAttack;
+
+    private void Start()
     {
-        
+        specialAbility = Instantiate(specialAbilityPrefab, transform.position, Quaternion.identity);
+        casterAttack = Instantiate(casterAttackPrefab, transform.position, Quaternion.identity);
+        casterAttack.GetAllVariables.castingHandTransform = castingHandTransform;
+        casterAttack.GetAllVariables.targetTransform = oponent;
+        battleUI.SetHud(unit);
     }
 
     public void Init(Transform opponentTransform)
@@ -33,6 +45,10 @@ public class PlayerController : MonoBehaviour
         oponent = opponentTransform;
     }
 
+    public SetCharacterFromSO GetSetter()
+    {
+        return setter;
+    }
     public void TakeDamage()
     {
         takeDamageParticles.Play();
@@ -41,21 +57,19 @@ public class PlayerController : MonoBehaviour
 
     public void HealerAbility()
     {
-        healParticles.Play();
-        playerAnimator.SetTrigger("Heal");
+        specialAbility.GetAllVariables.casterTransform = transform;
+        specialAbility.GetAllVariables.casterAnimator = playerAnimator;
+        specialAbility.Cast();
     }
-
-
+    
     public void HealerAttack()
     {
-        _fireball = Instantiate(fireball.gameObject, castingHandTransform.position, Quaternion.identity).GetComponent<Fireball>();
-        _fireball.Shoot(oponent,20,true);
+        casterAttack.GetAllVariables.castingHandTransform = castingHandTransform;
+        casterAttack.GetAllVariables.targetTransform = oponent;
+        casterAttack.GetAllVariables.casterAnimator = playerAnimator;
+        casterAttack.Cast();
     }
-    public void HealerAttackStart()
-    {
-        Debug.Log("healer");
-        playerAnimator.SetTrigger("HealerAttack");
-    }
+    
    public  void AttackMelee()
    {
        StartCoroutine(AttackMeleeDelay());

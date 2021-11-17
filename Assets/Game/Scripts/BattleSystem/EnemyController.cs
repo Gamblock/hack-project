@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
-   public Fireball fireballPrefab;
+   [FormerlySerializedAs("fireballPrefab")] public Projectile projectilePrefab;
    public Animator enemyAnimator;
    public Transform castingHandTransform;
    public int fireballDamage = 15;
@@ -15,9 +16,9 @@ public class EnemyController : MonoBehaviour
    public IntEventChannelSO onPlayerDamaged;
    public float spikeYOffset = -1.7f;
    public ParticleSystem takeDamageParticles;
-
+    
    private Transform oponent;
-   private Fireball fireball;
+   private Projectile _projectile;
 
    public void Init(Transform opponentTransform)
    {
@@ -40,8 +41,8 @@ public class EnemyController : MonoBehaviour
    }
    public void EnemyFireballAttack()
    {
-       fireball = Instantiate(fireballPrefab.gameObject, castingHandTransform.position, Quaternion.identity).GetComponent<Fireball>();
-       fireball.Shoot(oponent,fireballDamage,false);
+       _projectile = Instantiate(projectilePrefab.gameObject, castingHandTransform.position, Quaternion.identity).GetComponent<Projectile>();
+       _projectile.Shoot(oponent,fireballDamage,onPlayerDamaged);
    }
 
    public void UseRandomAttack()
