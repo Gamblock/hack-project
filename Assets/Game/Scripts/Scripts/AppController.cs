@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using Doozy.Engine.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class AppController : MonoBehaviour
 {
    public CharacterInfoSO characterInfoSo;
-   public SetupCardFromCharacterSO cardSetter;
+   [FormerlySerializedAs("cardSetter")] public SetupCardsFromCharacterSO cardsSetter;
    public Button creatCharacterButton;
    public VoidEventChannelSO onServerDataNotFound;
 

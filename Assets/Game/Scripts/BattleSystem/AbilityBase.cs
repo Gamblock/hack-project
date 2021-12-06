@@ -11,9 +11,11 @@ public struct AllVariables
     public Transform castingHandTransform;
     public Animator casterAnimator;
 }
+[CreateAssetMenu(fileName = "Ability")]
 public abstract class AbilityBase : MonoBehaviour
 {
+    
     public AllVariables GetAllVariables;
-    public abstract void Cast();
+    public virtual void Cast(){}
 
 }

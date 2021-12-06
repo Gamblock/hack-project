@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class DagableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
+    public event Action<bool> OnItemDropped = b => { };
     public TypeEnums.ResourceTypes resourceType;
     public CurrentSelectedResourcesSO currentSelectedResourcesSo;
     public float scale = 1.5f;
@@ -13,6 +14,7 @@ public class DagableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
     private Vector3 startPosition;
+    
 
     [HideInInspector] public bool inPlace;
 
@@ -26,7 +28,7 @@ public class DagableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void OnPointerDown(PointerEventData eventdata)
     {
-       
+       Debug.Log("Pointer down");
     }
 
     public void OnEndDrag(PointerEventData eventDta)
@@ -41,6 +43,7 @@ public class DagableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         {
             currentSelectedResourcesSo.selectedResourcesList.Add(resourceType);
             rectTransform.localScale = new Vector3(scale, scale, scale);
+            OnItemDropped.Invoke(true);
         }
     }
     
@@ -49,6 +52,7 @@ public class DagableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         if (inPlace)
         {
             currentSelectedResourcesSo.selectedResourcesList.Remove(resourceType);
+            OnItemDropped.Invoke(false);
         }
         inPlace = false;
         canvasGroup.alpha = 0.6f;

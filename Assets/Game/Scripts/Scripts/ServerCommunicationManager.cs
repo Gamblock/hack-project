@@ -24,6 +24,7 @@ public class ServerCommunicationManager : MonoBehaviour
 
     private Model model;
     private string email;
+    private int index;
 
     private void Awake()
     {
@@ -40,9 +41,9 @@ public class ServerCommunicationManager : MonoBehaviour
     }
     public void ShowEmail(string mail)
     {
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.SetString(emailkeyKey,mail);
         StartCoroutine(GetUserByEmail(mail));
-        tokenController.UpdateTokenAmount(300);
     }
     
    
@@ -65,6 +66,7 @@ public class ServerCommunicationManager : MonoBehaviour
                 user = JsonUtility.FromJson<User>(www.downloadHandler.text);
                 PlayerPrefs.SetString(userIDKey,user._id);
                 PlayerPrefs.SetInt(tokenKey,user.tokenAmount);
+                tokenController.UpdateTokenAmount(0);
             }
         }
     }
@@ -93,11 +95,13 @@ public class ServerCommunicationManager : MonoBehaviour
 
     public void SetTokenAmountOnServer(int tokenAmount)
     {
+        Debug.Log(index + "set calls");
+        index++;
         StartCoroutine(SetUserTokenAmount(tokenAmount));
     }
     private IEnumerator SetUserTokenAmount(int tokenAmount)
     {
-       
+        
         WWWForm form = new WWWForm();
        form.AddField("tokenAmount", tokenAmount);
         using (UnityWebRequest www =
@@ -111,7 +115,7 @@ public class ServerCommunicationManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(www.downloadHandler.text);  
+                Debug.Log(www.downloadHandler.text);
             }
         }
     }

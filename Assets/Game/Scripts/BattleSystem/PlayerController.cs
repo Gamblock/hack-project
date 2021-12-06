@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -19,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public SetCharacterFromSO setter;
     public BattleUI battleUI;
     public BattleUnit unit;
+    public List<GameObject> dpsLoadout;
+    public List<GameObject> tankLoadout;
+    public List<GameObject> healerLoadout;
+    public MMFeedbacks testFeedBack;
     
     private Transform oponent;
     private TypeEnums.ClassTypes classType;
@@ -45,14 +50,40 @@ public class PlayerController : MonoBehaviour
         oponent = opponentTransform;
     }
 
-    public SetCharacterFromSO GetSetter()
+    public CharacterInfoSO GetCurrentCharacter(ServerCommunicationManager serverManager)
     {
-        return setter;
+        setter.serverManager = serverManager;
+        CharacterInfoSO tempChar = setter.SetCharacter();
+        if (tempChar.classType == TypeEnums.ClassTypes.Healer)
+        {
+            foreach (var gearPiece in healerLoadout)
+            {
+                gearPiece.SetActive(true);
+            }
+        }
+        if (tempChar.classType == TypeEnums.ClassTypes.Tank)
+        {
+            foreach (var gearPiece in tankLoadout)
+            {
+                gearPiece.SetActive(true);
+            }
+        } 
+        if (tempChar.classType == TypeEnums.ClassTypes.DamageDealer)
+        {
+            foreach (var gearPiece in dpsLoadout)
+            {
+                gearPiece.SetActive(true);
+            }
+        }
+
+        return tempChar;
     }
-    public void TakeDamage()
+    public void TakeDamage(int damageValue)
     {
         takeDamageParticles.Play();
         playerAnimator.SetTrigger("Damaged");
+        unit.currentHp -= damageValue;
+        battleUI.SetHP(unit.currentHp);
     }
 
     public void HealerAbility()
@@ -80,6 +111,7 @@ public class PlayerController : MonoBehaviour
        playerAnimator.SetTrigger("Attack");
        yield return new WaitForSeconds(0.5f);
        slashParticles.Play();
+       testFeedBack.PlayFeedbacks();
        onEnemyDamaged.RaiseEvent(20); 
    }
    public void TankAbility()
@@ -89,7 +121,6 @@ public class PlayerController : MonoBehaviour
    }
    public void DPSAbility()
    {
-       Debug.Log("dps");
        playerAnimator.SetTrigger("Heal");
        dpsAbilityParticles.Play();
    }

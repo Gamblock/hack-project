@@ -17,9 +17,7 @@ public enum BattleStates
 }
 public class BattleSystem : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-
-    public Transform playerPosition;
+    public EnemyController enemyPrefab;
     public Transform enemyPosition;
     public BattleStates state;
     public CanvasGroup winscreenCanvas;
@@ -33,7 +31,6 @@ public class BattleSystem : MonoBehaviour
     
     private BattleUnit playerUnit;
     private BattleUnit enemyUnit;
-    private GameObject enemy;
     private PlayerController playerController;
     private EnemyController enemyController;
     private bool isFirstTurn = true;
@@ -41,6 +38,7 @@ public class BattleSystem : MonoBehaviour
     private bool tankAbilityUsed;
     private bool dpsAbilityUsed;
     private bool playerUsedAbility;
+    private bool hasPlayerwon;
     
     private void Start()
     {
@@ -72,15 +70,14 @@ public class BattleSystem : MonoBehaviour
     }
     public void SetUpBattle()
     {
-        enemy =  Instantiate(enemyPrefab, enemyPosition.position,enemyPosition.rotation);
-        enemyController = enemy.GetComponent<EnemyController>();
-        playerController.Init(enemy.transform);
+        enemyController =  Instantiate(enemyPrefab, enemyPosition.position,enemyPosition.rotation);
+        playerController.Init(enemyController.transform);
         enemyController.Init(playerController.transform);
         playerUnit = playerController.unit;
         playerUnit.currentHp = playerUnit.hp;
-        enemyUnit = enemy.GetComponent<BattleUnit>();
+        enemyUnit = enemyController.unit;
         enemyUnit.currentHp = enemyUnit.hp;
-        enemy.GetComponent<BattleUI>().SetHud(enemyUnit);
+        enemyController.battleUi.SetHud(enemyUnit);
         state = BattleStates.PlayerTurn;
     }
     
@@ -88,6 +85,12 @@ public class BattleSystem : MonoBehaviour
     {
         if (enemyUnit.currentHp <= 0)
         {
+            if (hasPlayerwon)
+            {
+                return;
+            }
+
+            hasPlayerwon = true;
             state = BattleStates.Won;
             winscreenCanvas.interactable = true;
             winscreenCanvas.alpha = 1;
@@ -179,7 +182,6 @@ public class BattleSystem : MonoBehaviour
     public  void DamagePlayer(int damageValue)
     {
         StartCoroutine(DamagePlayerDelay(damageValue));
-
     } 
     private IEnumerator  DamagePlayerDelay(int damageValue)
     {
@@ -190,9 +192,7 @@ public class BattleSystem : MonoBehaviour
             tankAbilityUsed = false;
             state = BattleStates.PlayerTurn;
         }
-        playerUnit.currentHp = playerUnit.currentHp - damageValue;
-        playerUnit.gameObject.GetComponent<BattleUI>().SetHP(playerUnit.currentHp);
-        playerController.TakeDamage();
+        playerController.TakeDamage(damageValue);
         damageNumbers.CreateNew(damageValue, playerController.transform.position);
         yield return new WaitForSeconds(1);
         state = BattleStates.PlayerTurn;
@@ -209,10 +209,9 @@ public class BattleSystem : MonoBehaviour
             damageValue = damageValue * 2 + 5;
             dpsAbilityUsed = false;
         }
-        enemyUnit.currentHp = enemyUnit.currentHp - damageValue;
-        enemyUnit.gameObject.GetComponent<BattleUI>().SetHP(enemyUnit.currentHp);
-        enemy.GetComponent<EnemyController>().TakeDamage();
-        damageNumbers.CreateNew(damageValue, enemy.transform.position);
+        
+        enemyController.TakeDamage(damageValue);
+        damageNumbers.CreateNew(damageValue, enemyController.transform.position);
         yield return new WaitForSeconds(1);
         state = BattleStates.EnemyTurn;
         enemyCanAttack = true;  

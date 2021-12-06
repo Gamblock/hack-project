@@ -16,7 +16,10 @@ public class EnemyController : MonoBehaviour
    public IntEventChannelSO onPlayerDamaged;
    public float spikeYOffset = -1.7f;
    public ParticleSystem takeDamageParticles;
-    
+   public BattleUI battleUi;
+   public BattleUnit unit;
+
+   public Animation anim;
    private Transform oponent;
    private Projectile _projectile;
 
@@ -25,6 +28,10 @@ public class EnemyController : MonoBehaviour
        oponent = opponentTransform;
    }
 
+   private void OnEnable()
+   {
+       battleUi.SetHud(unit);
+   }
    public void CastFireball()
    {
        enemyAnimator.SetTrigger("Fireball");
@@ -59,8 +66,10 @@ public class EnemyController : MonoBehaviour
            CastLightning();
        }
    }
-   public void TakeDamage()
+   public void TakeDamage(int damageValue)
    {
+       unit.currentHp = unit.currentHp - damageValue; 
+       battleUi.SetHP(unit.currentHp);
        takeDamageParticles.Play();
        enemyAnimator.SetTrigger("Damaged");
    }

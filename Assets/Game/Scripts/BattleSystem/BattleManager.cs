@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour
     public BattleSystemUISetup battleUI;
     public Transform playerPosition;
     public BattleSystem battler;
+    
 
     private PlayerController controller;
 
@@ -19,19 +20,13 @@ public class BattleManager : MonoBehaviour
         Init();
     }
 
+    
     public void Init()
     {
         controller = Instantiate(playerController, playerPosition.position,Quaternion.identity);
         battler.InitPlayer(controller);
         battler.SetUpBattle();
-        StartCoroutine(SetCharWithDelay());
+        battleUI.SetUIButtons(controller.GetCurrentCharacter(server));
     }
-
-    private IEnumerator SetCharWithDelay()
-    {
-        controller.setter.serverManager = server;
-        yield return new WaitForSeconds(0.5f);
-        battleUI.SetUIButtons(controller.setter.SetCharacter());
-        
-    }
+    
 }

@@ -19,6 +19,7 @@ public class AbilitySelfCast : AbilityBase
 
     private IEnumerator CastSpell()
     {
+        
         spellParticles.transform.position = GetAllVariables.casterTransform.position;
         GetAllVariables.casterAnimator.SetTrigger(triggerName);
         yield return new WaitForSeconds(delayBeforeParticlesPlay);
