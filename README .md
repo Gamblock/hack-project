@@ -1,4 +1,8 @@
 # Description
+* Play and Earn $GLRY, withdraw on DEX
+ Create unique Hero, save statistics in NFT and exchange on marketplaces
+ Use NFTs not only in one game, but in metaverse
+ Use Clover Ecosystem for game growing
 * This repository contains all the gameplay logic
 * Gameplay was developed using Unity
 * Characters are randomly generated based on resources that the player uses to create them
